@@ -4,6 +4,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from datetime import datetime
@@ -164,8 +165,12 @@ nav.toc h2 {
 }
 nav.toc ol { list-style: none; margin: 0; padding: 0; }
 nav.toc li { margin: 0; }
+
 nav.toc a {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
   color: var(--muted);
   text-decoration: none;
   font-size: 13px;
@@ -173,6 +178,7 @@ nav.toc a {
   padding: 6px 0 6px 10px;
   border-left: 2px solid transparent;
 }
+nav.toc a .t { flex: 1; min-width: 0; }
 nav.toc a:hover { color: var(--ink); }
 nav.toc a.active {
   color: var(--accent);
@@ -180,6 +186,41 @@ nav.toc a.active {
   font-weight: 600;
 }
 nav.toc .l3 { padding-left: 22px; font-size: 12px; }
+nav.toc .legend {
+  margin: 0 0 14px;
+  color: var(--faint);
+  font-size: 12px;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.bias {
+  flex-shrink: 0;
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 0 6px;
+  border-radius: 4px;
+  letter-spacing: .12em;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+.bias.long { color: #c0392b; background: rgba(192, 57, 43, .12); }
+.bias.short { color: #1e7a52; background: rgba(30, 122, 82, .14); }
+.bias.neutral { color: #6f675d; background: rgba(111, 103, 93, .12); }
+html[data-theme="dark"] .bias.long,
+html:not([data-theme="light"]) .bias.long { color: #e06b62; background: rgba(224, 107, 98, .18); }
+html[data-theme="dark"] .bias.short,
+html:not([data-theme="light"]) .bias.short { color: #5dcaa0; background: rgba(93, 202, 160, .16); }
+html[data-theme="dark"] .bias.neutral,
+html:not([data-theme="light"]) .bias.neutral { color: #b0a79b; background: rgba(176, 167, 155, .16); }
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"]) .bias.long { color: #c0392b; background: rgba(192, 57, 43, .12); }
+  html:not([data-theme="dark"]) .bias.short { color: #1e7a52; background: rgba(30, 122, 82, .14); }
+  html:not([data-theme="dark"]) .bias.neutral { color: #6f675d; background: rgba(111, 103, 93, .12); }
+}
 
 article header.hero {
   padding: 8px 0 28px;
@@ -438,6 +479,67 @@ JS = r"""
 """
 
 
+
+SKIP_BIAS = (
+    "市场总览",
+    "夜盘",
+    "后续关注",
+    "数据缺口",
+    "主要来源",
+    "基本面",
+    "分析逻辑",
+    "技术面",
+)
+
+
+def load_bias_items(date: str) -> list[dict]:
+    path = ROOT / "scans" / f"{date}-bias.json"
+    if not path.exists():
+        path = ROOT / "scans" / "bias.json"
+    if not path.exists():
+        return []
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return data.get("items", data if isinstance(data, list) else [])
+
+
+def should_label(text: str) -> bool:
+    return not any(s in text for s in SKIP_BIAS)
+
+
+def find_bias(text: str, items: list[dict]) -> dict | None:
+    hits = [it for it in items if (it.get("match") or "") and it["match"] in text]
+    if not hits:
+        return None
+    return max(hits, key=lambda it: len(it["match"]))
+
+
+def badge_html(bias: str, reason: str = "") -> str:
+    cls = {"多": "long", "空": "short", "中性": "neutral"}.get(bias)
+    if not cls:
+        return ""
+    title = f' title="{reason}"' if reason else ""
+    return f'<span class="bias {cls}"{title}>{bias}</span>'
+
+
+def apply_bias(html: str, toc: list[dict], items: list[dict]) -> tuple[str, list[dict]]:
+    for item in toc:
+        hit = find_bias(item["text"], items) if should_label(item["text"]) else None
+        item["bias"] = hit.get("bias") if hit else None
+        item["reason"] = hit.get("reason") if hit else ""
+        if not item["bias"]:
+            continue
+        badge = badge_html(item["bias"], item["reason"])
+        hid = re.escape(item["id"])
+        html = re.sub(
+            rf'(<h{item["level"]}\b[^>]*\sid="{hid}"[^>]*>)(.*?)(</h{item["level"]}>)',
+            rf"\1\2 {badge}\3",
+            html,
+            count=1,
+            flags=re.S,
+        )
+    return html, toc
+
+
 def slugify(text: str, used: dict) -> str:
     text = re.sub(r"<[^>]+>", "", text)
     text = re.sub(r"\s+", "", text)
@@ -556,10 +658,18 @@ def toc_html(toc: list[dict]) -> str:
         if item["level"] > 3:
             continue
         cls = "l3" if item["level"] == 3 else "l2"
+        badge = badge_html(item.get("bias") or "", item.get("reason") or "")
         items.append(
-            f'<li><a class="{cls}" href="#{item["id"]}">{item["text"]}</a></li>'
+            f'<li><a class="{cls}" href="#{item["id"]}"><span class="t">{item["text"]}</span>{badge}</a></li>'
         )
-    return "<ol>\n" + "\n".join(items) + "\n</ol>"
+    legend = (
+        '<p class="legend">'
+        "依据基本面，不单看当日涨跌："
+        '<span class="bias long">多</span> 红 · '
+        '<span class="bias short">空</span> 绿，交织标 '
+        '<span class="bias neutral">中性</span></p>'
+    )
+    return legend + "\n<ol>\n" + "\n".join(items) + "\n</ol>"
 
 
 def build() -> Path:
@@ -569,6 +679,13 @@ def build() -> Path:
     body = conv.convert(body_md)
     body, toc = add_heading_ids(body)
     body = classify_subs(body)
+    date = SRC.stem.replace("-bias", "")
+    if date.startswith("scan-"):
+        date = date[len("scan-"):]
+    # SRC is like scans/2026-11-09.md
+    date = SRC.stem
+    bias_items = load_bias_items(date)
+    body, toc = apply_bias(body, toc, bias_items)
     body = wrap_tables(body)
     body = wrap_major_subsections(body)
 

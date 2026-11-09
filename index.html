@@ -152,8 +152,12 @@ nav.toc h2 {
 }
 nav.toc ol { list-style: none; margin: 0; padding: 0; }
 nav.toc li { margin: 0; }
+
 nav.toc a {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
   color: var(--muted);
   text-decoration: none;
   font-size: 13px;
@@ -161,6 +165,7 @@ nav.toc a {
   padding: 6px 0 6px 10px;
   border-left: 2px solid transparent;
 }
+nav.toc a .t { flex: 1; min-width: 0; }
 nav.toc a:hover { color: var(--ink); }
 nav.toc a.active {
   color: var(--accent);
@@ -168,6 +173,41 @@ nav.toc a.active {
   font-weight: 600;
 }
 nav.toc .l3 { padding-left: 22px; font-size: 12px; }
+nav.toc .legend {
+  margin: 0 0 14px;
+  color: var(--faint);
+  font-size: 12px;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.bias {
+  flex-shrink: 0;
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 0 6px;
+  border-radius: 4px;
+  letter-spacing: .12em;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+.bias.long { color: #c0392b; background: rgba(192, 57, 43, .12); }
+.bias.short { color: #1e7a52; background: rgba(30, 122, 82, .14); }
+.bias.neutral { color: #6f675d; background: rgba(111, 103, 93, .12); }
+html[data-theme="dark"] .bias.long,
+html:not([data-theme="light"]) .bias.long { color: #e06b62; background: rgba(224, 107, 98, .18); }
+html[data-theme="dark"] .bias.short,
+html:not([data-theme="light"]) .bias.short { color: #5dcaa0; background: rgba(93, 202, 160, .16); }
+html[data-theme="dark"] .bias.neutral,
+html:not([data-theme="light"]) .bias.neutral { color: #b0a79b; background: rgba(176, 167, 155, .16); }
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"]) .bias.long { color: #c0392b; background: rgba(192, 57, 43, .12); }
+  html:not([data-theme="dark"]) .bias.short { color: #1e7a52; background: rgba(30, 122, 82, .14); }
+  html:not([data-theme="dark"]) .bias.neutral { color: #6f675d; background: rgba(111, 103, 93, .12); }
+}
 
 article header.hero {
   padding: 8px 0 28px;
@@ -385,40 +425,41 @@ footer.disclaimer {
   <div class="wrap">
     <nav class="toc" id="toc">
       <h2>目录</h2>
-      <ol>
-<li><a class="l2" href="#一、市场总览">一、市场总览</a></li>
-<li><a class="l2" href="#二、碳酸锂LC2701（今日领跌）">二、碳酸锂 LC2701（今日领跌）</a></li>
-<li><a class="l3" href="#1）基本面概况">1）基本面概况</a></li>
-<li><a class="l3" href="#2）分析逻辑">2）分析逻辑</a></li>
-<li><a class="l3" href="#3）技术面">3）技术面</a></li>
-<li><a class="l2" href="#三、能化/油气链">三、能化 / 油气链</a></li>
-<li><a class="l3" href="#3.1原油SC2701">3.1 原油 SC2701</a></li>
-<li><a class="l3" href="#3.2燃料油FU2701">3.2 燃料油 FU2701</a></li>
-<li><a class="l3" href="#3.3LPGPG2612">3.3 LPG PG2612</a></li>
-<li><a class="l3" href="#3.4苯乙烯EB2612">3.4 苯乙烯 EB2612</a></li>
-<li><a class="l3" href="#3.5沥青BU2701（含厂库仓单异动）">3.5 沥青 BU2701（含厂库仓单异动）</a></li>
-<li><a class="l3" href="#3.6甲醇/PTA/EG/PVC（略写但仍给逻辑）">3.6 甲醇 / PTA / EG / PVC（略写但仍给逻辑）</a></li>
-<li><a class="l2" href="#四、铜CU2612（仓单急降、国内外库存劈叉）-铝简要">四、铜 CU2612（仓单急降、国内外库存劈叉）｜铝简要</a></li>
-<li><a class="l3" href="#4.1铜CU2612">4.1 铜 CU2612</a></li>
-<li><a class="l3" href="#4.2铝AL2612（简要）">4.2 铝 AL2612（简要）</a></li>
-<li><a class="l2" href="#五、黑色系（焦煤写透；螺纹/热卷/铁矿/焦炭给供需）">五、黑色系（焦煤写透；螺纹/热卷/铁矿/焦炭给供需）</a></li>
-<li><a class="l3" href="#5.1焦煤JM2701（重点）">5.1 焦煤 JM2701（重点）</a></li>
-<li><a class="l3" href="#5.2螺纹RB2701">5.2 螺纹 RB2701</a></li>
-<li><a class="l3" href="#5.3热卷HC2701">5.3 热卷 HC2701</a></li>
-<li><a class="l3" href="#5.4铁矿I2701">5.4 铁矿 I2701</a></li>
-<li><a class="l3" href="#5.5焦炭J2701">5.5 焦炭 J2701</a></li>
-<li><a class="l2" href="#六、生猪LH2701">六、生猪 LH2701</a></li>
-<li><a class="l3" href="#1）基本面概况-4">1）基本面概况</a></li>
-<li><a class="l3" href="#2）分析逻辑-4">2）分析逻辑</a></li>
-<li><a class="l3" href="#3）技术面-4">3）技术面</a></li>
-<li><a class="l2" href="#七、棕榈油P2701-豆油分化">七、棕榈油 P2701 ｜ 豆油分化</a></li>
-<li><a class="l3" href="#7.1棕榈油P2701">7.1 棕榈油 P2701</a></li>
-<li><a class="l3" href="#7.2豆油Y2701与分化逻辑">7.2 豆油 Y2701 与分化逻辑</a></li>
-<li><a class="l2" href="#八、夜盘补记（2026-11-0921:00开盘，金十）">八、夜盘补记（2026-11-09 21:00 开盘，金十）</a></li>
-<li><a class="l2" href="#九、后续关注点与数据缺口">九、后续关注点与数据缺口</a></li>
-<li><a class="l3" href="#后续关注（按优先级）">后续关注（按优先级）</a></li>
-<li><a class="l3" href="#主要数据缺口（诚实列表）">主要数据缺口（诚实列表）</a></li>
-<li><a class="l3" href="#主要来源">主要来源</a></li>
+      <p class="legend">依据基本面，不单看当日涨跌：<span class="bias long">多</span> 红 · <span class="bias short">空</span> 绿，交织标 <span class="bias neutral">中性</span></p>
+<ol>
+<li><a class="l2" href="#一、市场总览"><span class="t">一、市场总览</span></a></li>
+<li><a class="l2" href="#二、碳酸锂LC2701（今日领跌）"><span class="t">二、碳酸锂 LC2701（今日领跌）</span><span class="bias short" title="供增需弱：枧下窝复产推进、11月电池排产走弱、去库放缓，仓单增加">空</span></a></li>
+<li><a class="l3" href="#1）基本面概况"><span class="t">1）基本面概况</span></a></li>
+<li><a class="l3" href="#2）分析逻辑"><span class="t">2）分析逻辑</span></a></li>
+<li><a class="l3" href="#3）技术面"><span class="t">3）技术面</span></a></li>
+<li><a class="l2" href="#三、能化/油气链"><span class="t">三、能化 / 油气链</span><span class="bias short" title="油气链回吐地缘溢价，成本端已经向下游传导">空</span></a></li>
+<li><a class="l3" href="#3.1原油SC2701"><span class="t">3.1 原油 SC2701</span><span class="bias short" title="地缘溢价回吐，定价回到商品属性">空</span></a></li>
+<li><a class="l3" href="#3.2燃料油FU2701"><span class="t">3.2 燃料油 FU2701</span><span class="bias short" title="跟随原油成本坍塌">空</span></a></li>
+<li><a class="l3" href="#3.3LPGPG2612"><span class="t">3.3 LPG PG2612</span><span class="bias short" title="成本驱动下跌；低库存只能在油价止跌时限制跌幅，托不住续跌">空</span></a></li>
+<li><a class="l3" href="#3.4苯乙烯EB2612"><span class="t">3.4 苯乙烯 EB2612</span><span class="bias short" title="成本坍塌叠加装置重启和港口累库，低库存叙事失效">空</span></a></li>
+<li><a class="l3" href="#3.5沥青BU2701（含厂库仓单异动）"><span class="t">3.5 沥青 BU2701（含厂库仓单异动）</span><span class="bias short" title="跟随原油，且厂库仓单单日大增，削弱低库存逻辑">空</span></a></li>
+<li><a class="l3" href="#3.6甲醇/PTA/EG/PVC（略写但仍给逻辑）"><span class="t">3.6 甲醇 / PTA / EG / PVC（略写但仍给逻辑）</span><span class="bias short" title="MTO开工偏低、需求疲软，油价下跌压制反弹高度">空</span></a></li>
+<li><a class="l2" href="#四、铜CU2612（仓单急降、国内外库存劈叉）-铝简要"><span class="t">四、铜 CU2612（仓单急降、国内外库存劈叉）｜铝简要</span><span class="bias neutral" title="国内极低库存与高升水，对海外累库和利率压制，基本面多空劈叉">中性</span></a></li>
+<li><a class="l3" href="#4.1铜CU2612"><span class="t">4.1 铜 CU2612</span><span class="bias neutral" title="国内极低库存与高升水，对海外累库和利率压制，基本面多空劈叉">中性</span></a></li>
+<li><a class="l3" href="#4.2铝AL2612（简要）"><span class="t">4.2 铝 AL2612（简要）</span><span class="bias neutral" title="去库延续是强现实，但远月供应和利率构成弱预期">中性</span></a></li>
+<li><a class="l2" href="#五、黑色系（焦煤写透；螺纹/热卷/铁矿/焦炭给供需）"><span class="t">五、黑色系（焦煤写透；螺纹/热卷/铁矿/焦炭给供需）</span><span class="bias short" title="需求偏弱、铁水回落，板块整体驱动不强">空</span></a></li>
+<li><a class="l3" href="#5.1焦煤JM2701（重点）"><span class="t">5.1 焦煤 JM2701（重点）</span><span class="bias short" title="竞拍疲软、铁水下行、矿山被动累库">空</span></a></li>
+<li><a class="l3" href="#5.2螺纹RB2701"><span class="t">5.2 螺纹 RB2701</span><span class="bias neutral" title="低供给、低需求、低库存，产量回升而表需回落，驱动不强">中性</span></a></li>
+<li><a class="l3" href="#5.3热卷HC2701"><span class="t">5.3 热卷 HC2701</span><span class="bias short" title="板材需求偏弱，基本面弱于螺纹">空</span></a></li>
+<li><a class="l3" href="#5.4铁矿I2701"><span class="t">5.4 铁矿 I2701</span><span class="bias short" title="到港增加、港口累库、铁水下行，供需宽松">空</span></a></li>
+<li><a class="l3" href="#5.5焦炭J2701"><span class="t">5.5 焦炭 J2701</span><span class="bias short" title="焦企微亏，钢厂有提降意愿，跟随焦煤与铁水">空</span></a></li>
+<li><a class="l2" href="#六、生猪LH2701"><span class="t">六、生猪 LH2701</span><span class="bias short" title="现货仍弱、出栏和体重上升，本轮反弹是贴水修复而非基本面反转">空</span></a></li>
+<li><a class="l3" href="#1）基本面概况-4"><span class="t">1）基本面概况</span></a></li>
+<li><a class="l3" href="#2）分析逻辑-4"><span class="t">2）分析逻辑</span></a></li>
+<li><a class="l3" href="#3）技术面-4"><span class="t">3）技术面</span></a></li>
+<li><a class="l2" href="#七、棕榈油P2701-豆油分化"><span class="t">七、棕榈油 P2701 ｜ 豆油分化</span><span class="bias neutral" title="棕榈油库存压力大，豆油有收储支撑，油脂内部分化">中性</span></a></li>
+<li><a class="l3" href="#7.1棕榈油P2701"><span class="t">7.1 棕榈油 P2701</span><span class="bias short" title="产地与国内双高库存，近端弱现实">空</span></a></li>
+<li><a class="l3" href="#7.2豆油Y2701与分化逻辑"><span class="t">7.2 豆油 Y2701 与分化逻辑</span><span class="bias neutral" title="收储提供支撑，但丰产高压榨限制单边上行">中性</span></a></li>
+<li><a class="l2" href="#八、夜盘补记（2026-11-0921:00开盘，金十）"><span class="t">八、夜盘补记（2026-11-09 21:00 开盘，金十）</span></a></li>
+<li><a class="l2" href="#九、后续关注点与数据缺口"><span class="t">九、后续关注点与数据缺口</span></a></li>
+<li><a class="l3" href="#后续关注（按优先级）"><span class="t">后续关注（按优先级）</span></a></li>
+<li><a class="l3" href="#主要数据缺口（诚实列表）"><span class="t">主要数据缺口（诚实列表）</span></a></li>
+<li><a class="l3" href="#主要来源"><span class="t">主要来源</span></a></li>
 </ol>
     </nav>
     <article>
@@ -445,7 +486,7 @@ footer.disclaimer {
 </ol>
 <p>涨幅前列大致为原木（约 +1.96%）、生猪（+1.91%）、多晶硅、铂钯等；跌幅前列为碳酸锂、LPG、燃油、苯乙烯、纯苯、沥青、红枣等（新华财经商品日报）。</p>
 <hr />
-<h2 id="二、碳酸锂LC2701（今日领跌）">二、碳酸锂 LC2701（今日领跌）</h2>
+<h2 id="二、碳酸锂LC2701（今日领跌）">二、碳酸锂 LC2701（今日领跌） <span class="bias short" title="供增需弱：枧下窝复产推进、11月电池排产走弱、去库放缓，仓单增加">空</span></h2>
 <p><strong>合约与定义</strong>：广州期货交易所碳酸锂期货主力 <strong>LC2701</strong>，报价单位元/吨，合约乘数 1 吨/手。</p>
 <p><strong>当日盘口（日盘）</strong><br />
 - 收盘 <strong>87480</strong>，较昨结 <strong>-4460（-4.85%）</strong>；较昨收约 <strong>-5380（约 -5.8%）</strong>（SMM/金融界）<br />
@@ -480,9 +521,9 @@ footer.disclaimer {
 - 量价持仓：日盘成交仍大但较上日略缩；持仓 +9104 配合跌价 = 空头增仓特征。<br />
 - <strong>未取得官方 MACD 数值</strong>；结构上属跌破短期反弹高点后的回撤，能否在 8.6 万–8.7 万一带止跌，要看现货是否跟上以及仓单是否继续增。</p>
 <hr />
-<h2 id="三、能化/油气链">三、能化 / 油气链</h2>
+<h2 id="三、能化/油气链">三、能化 / 油气链 <span class="bias short" title="油气链回吐地缘溢价，成本端已经向下游传导">空</span></h2>
 <div class="section-card">
-<h3 id="3.1原油SC2701">3.1 原油 SC2701</h3>
+<h3 id="3.1原油SC2701">3.1 原油 SC2701 <span class="bias short" title="地缘溢价回吐，定价回到商品属性">空</span></h3>
 
 <p><strong>合约</strong>：上海国际能源交易中心中质含硫原油 <strong>SC2701</strong>，元/桶。<br />
 <strong>日盘</strong>：收约 <strong>624（约 -0.91%）</strong>，成交约 6.0 万手，持仓约 2.3 万手（生意社/金投）。仓单约 366.6 万桶、持平（奇货可查/金十能源口径）。  </p>
@@ -491,7 +532,7 @@ footer.disclaimer {
 <p><strong>技术面</strong>：日盘收跌；<strong>夜盘 21:00 开盘 SC 跌近 5%</strong>（金十），日盘跌幅不能代表夜盘风险。精确均线未从交易所终端取得，不虚构。</p>
 </div>
 <div class="section-card">
-<h3 id="3.2燃料油FU2701">3.2 燃料油 FU2701</h3>
+<h3 id="3.2燃料油FU2701">3.2 燃料油 FU2701 <span class="bias short" title="跟随原油成本坍塌">空</span></h3>
 
 <p><strong>日盘</strong>：收 <strong>4140（-143，-3.34%）</strong>，成交约 <strong>78.3 万手</strong>，持仓约 <strong>16.2 万手</strong>（金融界/生意社）。  </p>
 <p><strong>仓单（重要更正）</strong>：<br />
@@ -501,14 +542,14 @@ footer.disclaimer {
 <p><strong>技术面</strong>：日盘大阴线、放量；<strong>夜盘开盘跌超 6%</strong>（金十），短线波动极端。支撑/均线以夜盘走完后再标定更稳妥。</p>
 </div>
 <div class="section-card">
-<h3 id="3.3LPGPG2612">3.3 LPG PG2612</h3>
+<h3 id="3.3LPGPG2612">3.3 LPG PG2612 <span class="bias short" title="成本驱动下跌；低库存只能在油价止跌时限制跌幅，托不住续跌">空</span></h3>
 
 <p><strong>日盘</strong>：收 <strong>6478（-234，-3.49%）</strong>，成交约 17.7 万手，持仓约 6.9 万手。仓单约 5406 持平（奇货可查）。  </p>
 <p><strong>基本面</strong>：新华财经称近期港口及工厂库存水平偏低；但深加工利润萎缩、成品油淡季抑制化工需求。民用气随气温下降或有季节性支撑。  </p>
 <p><strong>逻辑</strong>：短线是成本驱动（原油/丙烷）。库存偏低限制“深跌空间”的说法成立的前提是原油止跌；若原油夜盘续崩，低库存也难托底（今日苯乙烯已演示这一点）。<strong>夜盘开盘 LPG 跌近 4%</strong>（金十）。</p>
 </div>
 <div class="section-card">
-<h3 id="3.4苯乙烯EB2612">3.4 苯乙烯 EB2612</h3>
+<h3 id="3.4苯乙烯EB2612">3.4 苯乙烯 EB2612 <span class="bias short" title="成本坍塌叠加装置重启和港口累库，低库存叙事失效">空</span></h3>
 
 <p><strong>日盘</strong>：收 <strong>8952（-318，-3.43%）</strong>，成交约 <strong>141 万手</strong>，持仓约 25.7 万手——全市场成交最活跃品种之一。  </p>
 <p><strong>基本面（同花顺收评综合）</strong>：<br />
@@ -519,7 +560,7 @@ footer.disclaimer {
 <p><strong>技术面</strong>：放量长阴；精确均线未核到官方源。</p>
 </div>
 <div class="section-card">
-<h3 id="3.5沥青BU2701（含厂库仓单异动）">3.5 沥青 BU2701（含厂库仓单异动）</h3>
+<h3 id="3.5沥青BU2701（含厂库仓单异动）">3.5 沥青 BU2701（含厂库仓单异动） <span class="bias short" title="跟随原油，且厂库仓单单日大增，削弱低库存逻辑">空</span></h3>
 
 <p><strong>日盘</strong>：收 <strong>4421（-134，-2.94%）</strong>，成交约 43.7 万手，持仓约 18.6 万手。五日跌幅约 <strong>-14.96%</strong>（同花顺）。  </p>
 <p><strong>仓单（金十，必须单独强调）</strong>：<br />
@@ -529,7 +570,7 @@ footer.disclaimer {
 <p><strong>逻辑</strong>：价格由原油 beta 主导；厂库仓单 +4 万吨是<strong>结构利空叠加</strong>，削弱“低库存=易涨”的单边想象。上沿=油价反弹；下沿=淡季需求更差之前的成本锚定。关注厂库仓单后续是否继续注册、以及仓单对应的现货流向。</p>
 </div>
 <div class="section-card">
-<h3 id="3.6甲醇/PTA/EG/PVC（略写但仍给逻辑）">3.6 甲醇 / PTA / EG / PVC（略写但仍给逻辑）</h3>
+<h3 id="3.6甲醇/PTA/EG/PVC（略写但仍给逻辑）">3.6 甲醇 / PTA / EG / PVC（略写但仍给逻辑） <span class="bias short" title="MTO开工偏低、需求疲软，油价下跌压制反弹高度">空</span></h3>
 
 <div class="table-wrap"><table>
 <thead>
@@ -574,9 +615,9 @@ footer.disclaimer {
 </table></div>
 <hr />
 </div>
-<h2 id="四、铜CU2612（仓单急降、国内外库存劈叉）-铝简要">四、铜 CU2612（仓单急降、国内外库存劈叉）｜铝简要</h2>
+<h2 id="四、铜CU2612（仓单急降、国内外库存劈叉）-铝简要">四、铜 CU2612（仓单急降、国内外库存劈叉）｜铝简要 <span class="bias neutral" title="国内极低库存与高升水，对海外累库和利率压制，基本面多空劈叉">中性</span></h2>
 <div class="section-card">
-<h3 id="4.1铜CU2612">4.1 铜 CU2612</h3>
+<h3 id="4.1铜CU2612">4.1 铜 CU2612 <span class="bias neutral" title="国内极低库存与高升水，对海外累库和利率压制，基本面多空劈叉">中性</span></h3>
 
 <p><strong>合约</strong>：上期所阴极铜 <strong>CU2612</strong>，元/吨，乘数 5 吨/手。<br />
 <strong>日盘</strong>：收 <strong>105500（+390，+0.37%）</strong>，最高约 106100、最低约 104580；成交约 <strong>12.2 万手</strong>，持仓约 <strong>19.6 万手（约 -9466）</strong>（金投/生意社）。</p>
@@ -606,15 +647,15 @@ footer.disclaimer {
 - 日盘缩量反弹、持仓下降，更像空头回补/修复，而非趋势反转。机构参考区间多见 <strong>10.3–10.9 万</strong>。</p>
 </div>
 <div class="section-card">
-<h3 id="4.2铝AL2612（简要）">4.2 铝 AL2612（简要）</h3>
+<h3 id="4.2铝AL2612（简要）">4.2 铝 AL2612（简要） <span class="bias neutral" title="去库延续是强现实，但远月供应和利率构成弱预期">中性</span></h3>
 
 <p>收 <strong>23175（+95，+0.41%）</strong>，成交约 19.3 万手，持仓约 22.4 万手。<br />
 仓单金十：<strong>49933（-2055）</strong>。社库约 <strong>46.7 万吨（周环比约 -3.9 万吨）</strong>，延续去库；现货升水回落至零轴附近（正信）。逻辑是<strong>强现实、弱预期</strong>（海外低库存 vs 远月交易印尼/中东供应），今日韧性好于锌铅，但高度仍受宏观利率压制。</p>
 <hr />
 </div>
-<h2 id="五、黑色系（焦煤写透；螺纹/热卷/铁矿/焦炭给供需）">五、黑色系（焦煤写透；螺纹/热卷/铁矿/焦炭给供需）</h2>
+<h2 id="五、黑色系（焦煤写透；螺纹/热卷/铁矿/焦炭给供需）">五、黑色系（焦煤写透；螺纹/热卷/铁矿/焦炭给供需） <span class="bias short" title="需求偏弱、铁水回落，板块整体驱动不强">空</span></h2>
 <div class="section-card">
-<h3 id="5.1焦煤JM2701（重点）">5.1 焦煤 JM2701（重点）</h3>
+<h3 id="5.1焦煤JM2701（重点）">5.1 焦煤 JM2701（重点） <span class="bias short" title="竞拍疲软、铁水下行、矿山被动累库">空</span></h3>
 
 <p><strong>合约</strong>：大商所焦煤 <strong>JM2701</strong>，元/吨，交易单位 60 吨/手。<br />
 <strong>日盘</strong>：收 <strong>1396（-18.5，-1.31%）</strong>；最高 1440、最低 1391.5；成交约 <strong>74.70 万手</strong>，持仓约 <strong>44.47 万手（约 -556）</strong>（兰格钢铁）。结算价 1414.5。</p>
@@ -647,20 +688,20 @@ footer.disclaimer {
 - 机构波动区间表述：焦煤约 <strong>1300–1500</strong>（南华）。</p>
 </div>
 <div class="section-card">
-<h3 id="5.2螺纹RB2701">5.2 螺纹 RB2701</h3>
+<h3 id="5.2螺纹RB2701">5.2 螺纹 RB2701 <span class="bias neutral" title="低供给、低需求、低库存，产量回升而表需回落，驱动不强">中性</span></h3>
 
 <p>收 <strong>3037（-4，-0.13%）</strong>，开 3045、高 3051、低 3031；持仓约 <strong>168.05 万手（约 -1477）</strong>（兰格）。<br />
 仓单同花顺：<strong>55731 吨持平</strong>（近一周约 -1494，近一月约 -6.1 万吨）。  </p>
 <p>周度（光大，截至约 11/8 当周）：产量 <strong>185.9 万吨（+4.72）</strong>，社库 <strong>334.98（-15.05）</strong>，厂库 <strong>147.39（+0.15）</strong>，表需 <strong>200.8（-5.27）</strong>。低供给、低需求、低库存，<strong>产量回升 + 表需回落 + 库存降幅收窄</strong>，驱动不强。成本端矿焦有支撑；国常会政策落地表述与“十五五”基建规划对情绪有扰动但未改基本面。</p>
 </div>
 <div class="section-card">
-<h3 id="5.3热卷HC2701">5.3 热卷 HC2701</h3>
+<h3 id="5.3热卷HC2701">5.3 热卷 HC2701 <span class="bias short" title="板材需求偏弱，基本面弱于螺纹">空</span></h3>
 
 <p>收 <strong>3186（-20，-0.62%）</strong>，成交约 41 万手，持仓约 160 万手。仓单约 20.1 万吨（-3535，奇货可查）。<br />
 周度：产量 291.28（+3.19），社库 351.31（-9.17），厂库 71（+3.28），表需 297.17（+1.61）。乘用车/重卡销售同比仍弱；华北环保限产对供应有边际扰动。跌幅大于螺纹，板材需求亮点不足。</p>
 </div>
 <div class="section-card">
-<h3 id="5.4铁矿I2701">5.4 铁矿 I2701</h3>
+<h3 id="5.4铁矿I2701">5.4 铁矿 I2701 <span class="bias short" title="到港增加、港口累库、铁水下行，供需宽松">空</span></h3>
 
 <p>收 <strong>687.5（-2，-0.29%）</strong>，成交约 22 万手，持仓约 52.7 万手。<br />
 供应：全球发运 3548 万吨（+180.6），47 港到港 3014 万吨（<strong>+653.8</strong>）——到港压力明显。<br />
@@ -668,13 +709,13 @@ footer.disclaimer {
 库存：47 港 <strong>17533.2 万吨（+244.43，同比 +1909）</strong>；钢厂进口矿 8561.48（-40.1）。<strong>港口累库 + 铁水下行 = 宽松格局未变</strong>。</p>
 </div>
 <div class="section-card">
-<h3 id="5.5焦炭J2701">5.5 焦炭 J2701</h3>
+<h3 id="5.5焦炭J2701">5.5 焦炭 J2701 <span class="bias short" title="焦企微亏，钢厂有提降意愿，跟随焦煤与铁水">空</span></h3>
 
 <p>收 <strong>1924.5（-12.5，-0.65%）</strong>，成交约 3.2 万手（相对清淡），持仓约 4.3 万手。<br />
 焦企现货利润约亏损 <strong>10 元/吨</strong>；独立焦企日产 60.44（-0.64）；全样本焦炭库存周去库约 <strong>27.94 万吨</strong>。钢厂有提降意愿，盘面跟随焦煤与铁水，弹性小于焦煤。</p>
 <hr />
 </div>
-<h2 id="六、生猪LH2701">六、生猪 LH2701</h2>
+<h2 id="六、生猪LH2701">六、生猪 LH2701 <span class="bias short" title="现货仍弱、出栏和体重上升，本轮反弹是贴水修复而非基本面反转">空</span></h2>
 <p><strong>合约</strong>：大商所生猪 <strong>LH2701</strong>，元/吨。<br />
 <strong>日盘</strong>：开 9240、高 9430、低 9230、收 <strong>9350</strong>；较结算价 <strong>+185</strong>（生意社；涨跌幅约 <strong>+1.91%</strong>）；成交约 <strong>15.79 万手</strong>，持仓约 <strong>16.21 万手（-11264）</strong>——<strong>涨价减仓</strong>，符合空头回补/离场特征。</p>
 <h3 id="1）基本面概况-4" class="sub fund">1）基本面概况</h3>
@@ -692,9 +733,9 @@ footer.disclaimer {
 <h3 id="3）技术面-4" class="sub tech">3）技术面</h3>
 <p>持仓连续下降配合反弹，属空头离场驱动的修复波。上方前高/密集成交区构成压力（日内高点 9430 已显示上方抛压）。精确均线未取到官方源；结构上更接近下跌趋势中的反弹浪，而非趋势反转确认。</p>
 <hr />
-<h2 id="七、棕榈油P2701-豆油分化">七、棕榈油 P2701 ｜ 豆油分化</h2>
+<h2 id="七、棕榈油P2701-豆油分化">七、棕榈油 P2701 ｜ 豆油分化 <span class="bias neutral" title="棕榈油库存压力大，豆油有收储支撑，油脂内部分化">中性</span></h2>
 <div class="section-card">
-<h3 id="7.1棕榈油P2701">7.1 棕榈油 P2701</h3>
+<h3 id="7.1棕榈油P2701">7.1 棕榈油 P2701 <span class="bias short" title="产地与国内双高库存，近端弱现实">空</span></h3>
 
 <p><strong>日盘</strong>：收 <strong>8583（-167，-1.91%）</strong>，成交约 42.3 万手，持仓约 55.0 万手；五日跌幅约 <strong>-7.69%</strong>（同花顺）。  </p>
 <p><strong>仓单（重要更正）</strong>：同花顺【仓单】快讯——大商所棕榈油仓单 <strong>1644，较上日持平</strong>。奇货可查曾显 <strong>+1000</strong>，<strong>作废</strong>。</p>
@@ -710,7 +751,7 @@ footer.disclaimer {
 <p>五日连续偏弱、领跌油脂；精确均线未核官方源。关键观察 MPOB 后能否止跌，以及 8500/8400 整数关口的持仓变化。</p>
 </div>
 <div class="section-card">
-<h3 id="7.2豆油Y2701与分化逻辑" class="sub logic">7.2 豆油 Y2701 与分化逻辑</h3>
+<h3 id="7.2豆油Y2701与分化逻辑" class="sub logic">7.2 豆油 Y2701 与分化逻辑 <span class="bias neutral" title="收储提供支撑，但丰产高压榨限制单边上行">中性</span></h3>
 
 <p>收 <strong>8657（-62，-0.71%）</strong>，明显抗跌于棕榈油。张家港一级豆油现货约 8990，基差 Y2701+<strong>335</strong>（南华）——现货升水走扩。<br />
 <strong>分化原因</strong>：① 中储粮 11/9 再收储约 <strong>20 万吨豆油</strong>（饲料行业信息网/南华）；② 棕榈油库存矛盾更尖锐；③ 美豆丰产与高压榨仍在，故豆油也难单边上行，只是跌幅受限。豆粕 M2701 收 3075（-0.84%），持仓约 192 万手，跟随油料偏弱。</p>
