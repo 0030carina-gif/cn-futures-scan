@@ -422,6 +422,56 @@ footer.disclaimer {
   .wrap { display: block; padding: 0; }
   .section-card { box-shadow: none; break-inside: avoid; }
 }
+
+.season-chart {
+  margin: 16px 0 22px;
+  padding: 10px 10px 6px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  max-width: 100%;
+}
+.season-chart svg.season-svg,
+.season-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+.season-chart figcaption {
+  margin: 4px 6px 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+.season-chart-group {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 14px 0 22px;
+}
+.season-svg {
+  --chart-bg: #fbf7f0;
+  --chart-ink: #1c1915;
+  --chart-muted: #6e675c;
+  --chart-grid: #e5ddcf;
+}
+html[data-theme="dark"] .season-svg {
+  --chart-bg: #221e1a;
+  --chart-ink: #f0e9de;
+  --chart-muted: #b0a79b;
+  --chart-grid: #3a342c;
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .season-svg {
+    --chart-bg: #221e1a;
+    --chart-ink: #f0e9de;
+    --chart-muted: #b0a79b;
+    --chart-grid: #3a342c;
+  }
+}
 """
 
 JS = r"""
@@ -672,6 +722,98 @@ def toc_html(toc: list[dict]) -> str:
     return legend + "\n<ol>\n" + "\n".join(items) + "\n</ol>"
 
 
+CHART_DIR = ROOT / "scans" / "charts"
+
+# Where to inject each symbol's seasonal chart in the HTML body.
+# Keys are substrings of the heading text (h2/h3); value is list of symbol codes.
+# (heading_substring, codes, prefer_anchor_regexes)
+# Anchor regexes are searched inside the section; chart is inserted after the first match.
+CHART_PLACEMENTS = [
+    ("二、碳酸锂", ["LC"], [r"交易所仓单[\s\S]{0,400}?</p>", r"<p><strong>库存[\s\S]*?</p>"]),
+    ("3.1 原油", ["SC"], [r"仓单约[\s\S]{0,80}?</p>", r"仓单[\s\S]{0,120}?</p>"]),
+    ("3.2 燃料油", ["FU"], [r"该口径作废[\s\S]{0,40}?</p>", r"燃油仓单[\s\S]{0,200}?</p>"]),
+    ("3.3 LPG", ["PG"], [r"仓单约[\s\S]{0,80}?</p>", r"仓单[\s\S]{0,80}?</p>"]),
+    ("3.4 苯乙烯", ["EB"], [r"工厂库存[\s\S]{0,80}?</p>", r"库存：[\s\S]{0,200}?</p>"]),
+    ("3.5 沥青", ["BU"], [r"厂库仓单[\s\S]{0,120}?</p>", r"仓单（金十[\s\S]{0,300}?</p>"]),
+    ("3.6 甲醇", ["MA", "TA", "EG", "V"], [r"</table></div>", r"</table>"]),
+    ("4.1 铜", ["CU"], [r"金十日讯 2844[\s\S]{0,120}?</p>", r"<p><strong>仓单[\s\S]*?</p>"]),
+    ("4.2 铝", ["AL"], [r"仓单金十[\s\S]{0,200}?</p>", r"社库约[\s\S]{0,200}?</p>"]),
+    ("5.1 焦煤", ["JM"], [r"交易所仓单[\s\S]{0,80}?</p>", r"<p><strong>库存[\s\S]*?</p>"]),
+    ("5.2 螺纹", ["RB"], [r"仓单同花顺[\s\S]{0,120}?</p>", r"仓单[\s\S]{0,80}?</p>"]),
+    ("5.3 热卷", ["HC"], [r"仓单约[\s\S]{0,80}?</p>", r"社库[\s\S]{0,120}?</p>"]),
+    ("5.4 铁矿", ["I"], [r"港口累库[\s\S]{0,80}?</p>", r"库存：47[\s\S]{0,200}?</p>"]),
+    ("5.5 焦炭", ["J"], [r"焦炭库存[\s\S]{0,120}?</p>", r"全样本焦炭库存[\s\S]{0,120}?</p>"]),
+    ("六、生猪", ["LH"], [r"冻品库容[\s\S]{0,200}?</p>", r"<p><strong>需求[\s\S]*?</p>"]),
+    ("7.1 棕榈油", ["P"], [r"作废。?</p>", r"棕榈油仓单[\s\S]{0,160}?</p>"]),
+    ("7.2 豆油", ["Y"], [r"跌幅受限。[\s\S]{0,80}?</p>", r"收储[\s\S]{0,200}?</p>"]),
+]
+
+
+def load_chart_fragment(code: str) -> str:
+    path = CHART_DIR / f"{code}_season.html"
+    if not path.exists():
+        note_path = CHART_DIR / f"{code}_skip.html"
+        if note_path.exists():
+            return note_path.read_text(encoding="utf-8")
+        return ""
+    return path.read_text(encoding="utf-8")
+
+
+def _chart_block(codes: list[str]) -> str:
+    frags = [load_chart_fragment(c) for c in codes]
+    frags = [f for f in frags if f]
+    if not frags:
+        return ""
+    if len(frags) == 1:
+        return "\n" + frags[0]
+    return '\n<div class="season-chart-group">\n' + "\n".join(frags) + "\n</div>\n"
+
+
+def inject_season_charts(html: str) -> str:
+    """Insert seasonal charts after inventory/receipt discussion inside each variety section."""
+    used: set[str] = set()
+    # Work on full HTML with look-ahead: find heading, then search forward until next same-or-higher heading
+    for key, codes, anchors in CHART_PLACEMENTS:
+        codes = [c for c in codes if c not in used]
+        if not codes:
+            continue
+        hm = re.search(
+            rf"<h([23])\b[^>]*>[^<]*{re.escape(key)}.*?</h\1>",
+            html,
+            flags=re.S,
+        )
+        if not hm:
+            continue
+        level = int(hm.group(1))
+        sec_start = hm.end()
+        # end at next h2, or next h3 if current is h3
+        if level == 2:
+            end_m = re.search(r"<h2\b", html[sec_start:])
+        else:
+            end_m = re.search(r"<h[23]\b", html[sec_start:])
+        sec_end = sec_start + end_m.start() if end_m else len(html)
+        section = html[sec_start:sec_end]
+        block = _chart_block(codes)
+        if not block:
+            for c in codes:
+                used.add(c)
+            continue
+        insert_at = None
+        for pat in anchors:
+            m = re.search(pat, section)
+            if m:
+                insert_at = m.end()
+                break
+        if insert_at is None:
+            insert_at = 0
+        section = section[:insert_at] + block + section[insert_at:]
+        html = html[:sec_start] + section + html[sec_end:]
+        for c in codes:
+            used.add(c)
+    return html
+
+
+
 def build() -> Path:
     raw = SRC.read_text(encoding="utf-8")
     meta, body_md = parse_front(raw)
@@ -688,6 +830,7 @@ def build() -> Path:
     body, toc = apply_bias(body, toc, bias_items)
     body = wrap_tables(body)
     body = wrap_major_subsections(body)
+    body = inject_season_charts(body)
 
     fields = "".join(
         f"<dt>{k}</dt><dd>{v}</dd>" for k, v in meta["fields"] if k != "声明"

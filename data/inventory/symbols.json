@@ -1,0 +1,33 @@
+{
+  "asof": "2026-11-09",
+  "year_colors": {
+    "2026": "#c0392b",
+    "2025": "#7d3c98",
+    "2024": "#d4a017",
+    "2023": "#1e7a52",
+    "2022": "#2f6fed"
+  },
+  "older_color": "#9a9488",
+  "symbols": {
+    "LC": {"name": "碳酸锂", "title": "碳酸锂仓单季节性", "unit": "手", "unit_scale": 1, "source_pref": ["em", "99"], "anchor": 21720, "anchor_note": "备忘主口径 21720（+679）；东财/快讯 11/9 为 23760（+2040）", "insert_after": ["库存", "交易所仓单"], "section_match": ["碳酸锂"]},
+    "SC": {"name": "原油", "title": "原油仓单季节性", "unit": "万桶", "unit_scale": 10000, "source_pref": ["receipt", "99"], "anchor": 3666000, "section_match": ["原油 SC"]},
+    "FU": {"name": "燃料油", "title": "燃料油仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["receipt", "99"], "anchor": 7870, "section_match": ["燃料油 FU"]},
+    "PG": {"name": "LPG", "title": "LPG仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 5406, "section_match": ["LPG PG"]},
+    "EB": {"name": "苯乙烯", "title": "苯乙烯仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": null, "section_match": ["苯乙烯 EB"]},
+    "BU": {"name": "沥青", "title": "沥青仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["receipt", "99"], "anchor": 41560, "口径": "交易所注册仓单合计（含厂库）；11/9 仓库0 + 厂库41560", "section_match": ["沥青 BU"]},
+    "MA": {"name": "甲醇", "title": "甲醇仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 5011, "section_match": ["甲醇 / PTA", "甲醇 / PTA / EG / PVC"]},
+    "TA": {"name": "PTA", "title": "PTA仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["em", "99"], "anchor": 3197, "section_match": ["甲醇 / PTA"]},
+    "EG": {"name": "乙二醇", "title": "乙二醇仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 3327, "section_match": ["甲醇 / PTA"]},
+    "V": {"name": "PVC", "title": "PVC仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 111000, "section_match": ["甲醇 / PTA"]},
+    "CU": {"name": "铜", "title": "铜仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["receipt", "99", "em"], "anchor": 2844, "section_match": ["铜 CU2612", "4.1 铜"]},
+    "AL": {"name": "铝", "title": "铝仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["receipt", "99", "em"], "anchor": 49933, "section_match": ["铝 AL", "4.2 铝"]},
+    "JM": {"name": "焦煤", "title": "焦煤仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 0, "note": "交易所仓单长期多为 0，季节图仅供参考；社库/港口库存另见正文", "section_match": ["焦煤 JM"]},
+    "RB": {"name": "螺纹钢", "title": "螺纹钢仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["receipt", "99"], "anchor": 55731, "note": "以交易所/同花顺仓单为准；99期货网近月口径偏低已弃用冲突值", "section_match": ["螺纹 RB"]},
+    "HC": {"name": "热卷", "title": "热轧卷板仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["receipt", "99", "em"], "anchor": 199104, "section_match": ["热卷 HC"]},
+    "I": {"name": "铁矿石", "title": "铁矿石仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 3450, "note": "交易所注册仓单（吨），非47港社会库存", "section_match": ["铁矿 I"]},
+    "J": {"name": "焦炭", "title": "焦炭仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 999, "section_match": ["焦炭 J"]},
+    "LH": {"name": "生猪", "title": "生猪相关库存/仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 725, "note": "生猪无标准仓单库存概念；此处为公开源登记的交割库存近似序列，仅供参考", "section_match": ["生猪 LH"]},
+    "P": {"name": "棕榈油", "title": "棕榈油仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 1644, "section_match": ["棕榈油 P"]},
+    "Y": {"name": "豆油", "title": "豆油仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 27230, "section_match": ["豆油 Y"]}
+  }
+}

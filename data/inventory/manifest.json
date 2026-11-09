@@ -1,0 +1,256 @@
+{
+  "LC": {
+    "ok": true,
+    "years": "2026-2026",
+    "n": 65,
+    "unit": "手",
+    "last": 21720.0,
+    "sources": [
+      "anchor",
+      "em"
+    ],
+    "svg": "scans/charts/LC_season.svg"
+  },
+  "SC": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 527,
+    "unit": "万桶",
+    "last": 366.6,
+    "sources": [
+      "99qh",
+      "anchor",
+      "em",
+      "receipt"
+    ],
+    "svg": "scans/charts/SC_season.svg"
+  },
+  "FU": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 1268,
+    "unit": "吨",
+    "last": 7870.0,
+    "sources": [
+      "99qh",
+      "anchor",
+      "em",
+      "receipt"
+    ],
+    "svg": "scans/charts/FU_season.svg"
+  },
+  "PG": {
+    "ok": true,
+    "years": "2020-2026",
+    "n": 1471,
+    "unit": "吨",
+    "last": 5406.0,
+    "sources": [
+      "99qh",
+      "anchor"
+    ],
+    "svg": "scans/charts/PG_season.svg"
+  },
+  "EB": {
+    "ok": true,
+    "years": "2019-2026",
+    "n": 1338,
+    "unit": "吨",
+    "last": 0.0,
+    "sources": [
+      "99qh"
+    ],
+    "svg": "scans/charts/EB_season.svg"
+  },
+  "BU": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 785,
+    "unit": "吨",
+    "last": 41560.0,
+    "sources": [
+      "99qh",
+      "anchor",
+      "em",
+      "receipt"
+    ],
+    "svg": "scans/charts/BU_season.svg"
+  },
+  "MA": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 3593,
+    "unit": "吨",
+    "last": 5011.0,
+    "sources": [
+      "99qh",
+      "anchor"
+    ],
+    "svg": "scans/charts/MA_season.svg"
+  },
+  "TA": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 4434,
+    "unit": "吨",
+    "last": 3197.0,
+    "sources": [
+      "99qh",
+      "anchor",
+      "em"
+    ],
+    "svg": "scans/charts/TA_season.svg"
+  },
+  "EG": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 1905,
+    "unit": "吨",
+    "last": 3327.0,
+    "sources": [
+      "99qh",
+      "anchor"
+    ],
+    "svg": "scans/charts/EG_season.svg"
+  },
+  "V": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 4170,
+    "unit": "吨",
+    "last": 111000.0,
+    "sources": [
+      "99qh",
+      "anchor"
+    ],
+    "svg": "scans/charts/V_season.svg"
+  },
+  "CU": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 1232,
+    "unit": "吨",
+    "last": 2844.0,
+    "sources": [
+      "99qh",
+      "anchor",
+      "em",
+      "receipt"
+    ],
+    "svg": "scans/charts/CU_season.svg"
+  },
+  "AL": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 1229,
+    "unit": "吨",
+    "last": 49933.0,
+    "sources": [
+      "99qh",
+      "anchor",
+      "em",
+      "receipt"
+    ],
+    "svg": "scans/charts/AL_season.svg"
+  },
+  "JM": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 2507,
+    "unit": "吨",
+    "last": 0.0,
+    "sources": [
+      "99qh",
+      "anchor"
+    ],
+    "svg": "scans/charts/JM_season.svg"
+  },
+  "RB": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 1011,
+    "unit": "吨",
+    "last": 55731.0,
+    "sources": [
+      "99qh",
+      "anchor",
+      "em",
+      "receipt"
+    ],
+    "svg": "scans/charts/RB_season.svg"
+  },
+  "HC": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 759,
+    "unit": "吨",
+    "last": 199104.0,
+    "sources": [
+      "99qh",
+      "anchor",
+      "em",
+      "receipt"
+    ],
+    "svg": "scans/charts/HC_season.svg"
+  },
+  "I": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 3011,
+    "unit": "吨",
+    "last": 3450.0,
+    "sources": [
+      "99qh",
+      "anchor"
+    ],
+    "svg": "scans/charts/I_season.svg"
+  },
+  "J": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 3615,
+    "unit": "吨",
+    "last": 999.0,
+    "sources": [
+      "99qh",
+      "anchor"
+    ],
+    "svg": "scans/charts/J_season.svg"
+  },
+  "LH": {
+    "ok": true,
+    "years": "2021-2026",
+    "n": 976,
+    "unit": "吨",
+    "last": 725.0,
+    "sources": [
+      "99qh",
+      "anchor"
+    ],
+    "svg": "scans/charts/LH_season.svg"
+  },
+  "P": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 4136,
+    "unit": "吨",
+    "last": 1644.0,
+    "sources": [
+      "99qh",
+      "anchor"
+    ],
+    "svg": "scans/charts/P_season.svg"
+  },
+  "Y": {
+    "ok": true,
+    "years": "2018-2026",
+    "n": 4385,
+    "unit": "吨",
+    "last": 27230.0,
+    "sources": [
+      "99qh",
+      "anchor"
+    ],
+    "svg": "scans/charts/Y_season.svg"
+  }
+}

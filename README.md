@@ -10,6 +10,23 @@
 
 目录标题会按**基本面**标注方向，不单看当日涨跌：红色「多」、绿色「空」；基本面明显交织时标「中性」。把鼠标放到标注上可看到简要理由。
 
+各品种正文的库存/仓单段落后附有**仓单季节性图**（内联 SVG）。默认口径为交易所注册仓单；铁矿等注明「非港口社库」。颜色：当年红、前一年紫，再往前黄/绿/蓝，更早合并为灰色「其他」。数据缓存于 [`data/inventory/`](./data/inventory/)，主要来自 99 期货网长序列，上期所/能源中心近端用交易所仓单日报与备忘核对点校准。
+
 ## 本期
 
 - [2026-11-09 深度扫描](https://0030carina-gif.github.io/cn-futures-scan/scans/2026-11-09.html)（日盘收盘 + 夜盘开盘补记）
+
+## 本地重建
+
+```bash
+# 刷新仓单缓存并重绘季节图
+/tmp/mdenv/bin/python update_inventory.py
+
+# 仅重绘（用已有 CSV）
+/tmp/mdenv/bin/python update_inventory.py --charts-only
+
+# 从备忘 Markdown 生成阅读页（嵌入季节图 + 多空标注）
+/tmp/mdenv/bin/python build_scan_html.py
+```
+
+生成物：`index.html` 与 `scans/YYYY-MM-DD.html`。
