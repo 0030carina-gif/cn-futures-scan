@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>期货全市场扫描 · 2026-11-09</title>
+  <style>
+:root {
+  --bg: #efe8db;
+  --paper: #fbf7f0;
+  --ink: #1c1915;
+  --muted: #6e675c;
+  --faint: #948c80;
+  --line: #e5ddcf;
+  --accent: #8d3a2b;
+  --accent-soft: #f4e6e0;
+  --up: #c0392b;
+  --down: #1e7a52;
+  --card: #fffdf8;
+  --soft: #f3eee4;
+  --shadow: 0 1px 2px rgba(40,30,16,.04), 0 10px 28px rgba(40,30,16,.06);
+  --sans: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", "Hiragino Sans GB",
+          "Microsoft YaHei", "Heiti SC", system-ui, sans-serif;
+  --serif: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "STSong",
+           "SimSun", Georgia, serif;
+  --mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+html[data-theme="dark"] {
+  --bg: #141210;
+  --paper: #1c1916;
+  --ink: #f0e9de;
+  --muted: #b0a79b;
+  --faint: #8a8277;
+  --line: #3a342c;
+  --accent: #e08a7a;
+  --accent-soft: #3a2723;
+  --up: #e06b62;
+  --down: #5dcaa0;
+  --card: #221e1a;
+  --soft: #2a251f;
+  --shadow: 0 1px 2px rgba(0,0,0,.25), 0 10px 28px rgba(0,0,0,.28);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --bg: #141210;
+    --paper: #1c1916;
+    --ink: #f0e9de;
+    --muted: #b0a79b;
+    --faint: #8a8277;
+    --line: #3a342c;
+    --accent: #e08a7a;
+    --accent-soft: #3a2723;
+    --up: #e06b62;
+    --down: #5dcaa0;
+    --card: #221e1a;
+    --soft: #2a251f;
+    --shadow: 0 1px 2px rgba(0,0,0,.25), 0 10px 28px rgba(0,0,0,.28);
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body { margin: 0; padding: 0; }
+body {
+  background:
+    radial-gradient(1200px 500px at 10% -10%, rgba(141,58,43,.06), transparent 50%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.85;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 22px;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+.brand .mark {
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: .16em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.brand .when {
+  color: var(--muted);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tools { display: flex; gap: 8px; flex-shrink: 0; }
+.tools button, .toc-toggle {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.tools button:hover, .toc-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.toc-toggle { display: none; }
+
+.wrap {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 760px);
+  gap: 48px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 36px 28px 96px;
+}
+
+nav.toc {
+  position: sticky;
+  top: 68px;
+  align-self: start;
+  max-height: calc(100vh - 88px);
+  overflow: auto;
+  padding-right: 8px;
+}
+nav.toc h2 {
+  margin: 0 0 12px;
+  font-size: 11px;
+  letter-spacing: .18em;
+  color: var(--faint);
+  font-weight: 600;
+  font-family: var(--sans);
+}
+nav.toc ol { list-style: none; margin: 0; padding: 0; }
+nav.toc li { margin: 0; }
+nav.toc a {
+  display: block;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1.45;
+  padding: 6px 0 6px 10px;
+  border-left: 2px solid transparent;
+}
+nav.toc a:hover { color: var(--ink); }
+nav.toc a.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+nav.toc .l3 { padding-left: 22px; font-size: 12px; }
+
+article header.hero {
+  padding: 8px 0 28px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 8px;
+}
+.kicker {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: .2em;
+  font-weight: 600;
+}
+h1.title {
+  font-family: var(--serif);
+  font-weight: 650;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.22;
+  letter-spacing: .02em;
+  margin: 0 0 10px;
+}
+.lede {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+.pill {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+  color: var(--ink);
+}
+.pill em { font-style: normal; color: var(--muted); margin-right: 6px; }
+.pill.down { color: var(--down); }
+.pill.up { color: var(--up); }
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 6px 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  box-shadow: var(--shadow);
+}
+.meta-grid dt { color: var(--faint); margin: 0; }
+.meta-grid dd { margin: 0; color: var(--ink); }
+
+article h2 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 650;
+  letter-spacing: .03em;
+  margin: 52px 0 16px;
+  padding-top: 8px;
+  scroll-margin-top: 76px;
+}
+article h2 .num {
+  color: var(--accent);
+  font-size: .78em;
+  margin-right: .35em;
+}
+article h3 {
+  font-size: 18px;
+  font-weight: 650;
+  margin: 32px 0 10px;
+  scroll-margin-top: 76px;
+}
+article h4 {
+  font-size: 16px;
+  font-weight: 650;
+  margin: 22px 0 8px;
+  color: var(--ink);
+  scroll-margin-top: 76px;
+}
+
+article p { margin: 0 0 12px; }
+article li { margin: 0 0 6px; }
+article ul, article ol { padding-left: 1.25em; margin: 0 0 14px; }
+article strong { font-weight: 650; }
+
+article hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 28px 0;
+}
+
+.section-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px 26px 8px;
+  margin: 20px 0 28px;
+  box-shadow: var(--shadow);
+}
+.section-card > h3:first-child,
+.section-card > h4:first-child { margin-top: 0; }
+
+h3.sub, h4.sub {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  letter-spacing: .06em;
+  margin: 26px 0 10px;
+}
+h3.sub::before, h4.sub::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+h3.sub.fund::before, h4.sub.fund::before { background: var(--accent); }
+h3.sub.logic::before, h4.sub.logic::before { background: #b8860b; }
+h3.sub.tech::before, h4.sub.tech::before { background: #2c6e6a; }
+html[data-theme="dark"] h3.sub.logic::before,
+html[data-theme="dark"] h4.sub.logic::before { background: #e0c170; }
+html[data-theme="dark"] h3.sub.tech::before,
+html[data-theme="dark"] h4.sub.tech::before { background: #7ec9c3; }
+
+.table-wrap { overflow-x: auto; margin: 0 0 16px; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.55;
+  min-width: 560px;
+}
+th, td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .06em;
+  background: var(--soft);
+}
+tr:last-child td { border-bottom: 0; }
+
+.note, .disclaimer {
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+footer.disclaimer {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.hero, article, .meta-grid, .pills, .section-card { min-width: 0; max-width: 100%; }
+.meta-grid dd { overflow-wrap: anywhere; word-break: break-word; }
+.pills { max-width: 100%; }
+.pill { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+
+@media (max-width: 960px) {
+  .wrap { grid-template-columns: 1fr; gap: 0; padding: 20px 18px 72px; }
+  .meta-grid {
+    grid-template-columns: 1fr;
+    gap: 2px 0;
+  }
+  .meta-grid dt { margin-top: 8px; }
+  .meta-grid dt:first-child { margin-top: 0; }
+  nav.toc {
+    display: none;
+    position: fixed;
+    top: 52px;
+    left: 12px;
+    right: 12px;
+    z-index: 30;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 16px 20px;
+    max-height: calc(100vh - 80px);
+    box-shadow: var(--shadow);
+  }
+  nav.toc.open { display: block; }
+  .toc-toggle { display: inline-flex; }
+  .section-card { padding: 16px 16px 4px; }
+  article h2 { font-size: 22px; margin-top: 36px; }
+}
+
+@media print {
+  .topbar, nav.toc, .tools, .toc-toggle { display: none !important; }
+  body { background: #fff; }
+  .wrap { display: block; padding: 0; }
+  .section-card { box-shadow: none; break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <span class="mark">期货全市场扫描</span>
+      <span class="when">2026-11-09 周一 · 日盘 + 夜盘补记</span>
+    </div>
+    <div class="tools">
+      <button class="toc-toggle" id="toc-toggle" type="button">目录</button>
+      <button id="theme-toggle" type="button">深色</button>
+    </div>
+  </div>
+  <div class="wrap">
+    <nav class="toc" id="toc">
+      <h2>目录</h2>
+      <ol>
+<li><a class="l2" href="#一、市场总览">一、市场总览</a></li>
+<li><a class="l2" href="#二、碳酸锂LC2701（今日领跌）">二、碳酸锂 LC2701（今日领跌）</a></li>
+<li><a class="l3" href="#1）基本面概况">1）基本面概况</a></li>
+<li><a class="l3" href="#2）分析逻辑">2）分析逻辑</a></li>
+<li><a class="l3" href="#3）技术面">3）技术面</a></li>
+<li><a class="l2" href="#三、能化/油气链">三、能化 / 油气链</a></li>
+<li><a class="l3" href="#3.1原油SC2701">3.1 原油 SC2701</a></li>
+<li><a class="l3" href="#3.2燃料油FU2701">3.2 燃料油 FU2701</a></li>
+<li><a class="l3" href="#3.3LPGPG2612">3.3 LPG PG2612</a></li>
+<li><a class="l3" href="#3.4苯乙烯EB2612">3.4 苯乙烯 EB2612</a></li>
+<li><a class="l3" href="#3.5沥青BU2701（含厂库仓单异动）">3.5 沥青 BU2701（含厂库仓单异动）</a></li>
+<li><a class="l3" href="#3.6甲醇/PTA/EG/PVC（略写但仍给逻辑）">3.6 甲醇 / PTA / EG / PVC（略写但仍给逻辑）</a></li>
+<li><a class="l2" href="#四、铜CU2612（仓单急降、国内外库存劈叉）-铝简要">四、铜 CU2612（仓单急降、国内外库存劈叉）｜铝简要</a></li>
+<li><a class="l3" href="#4.1铜CU2612">4.1 铜 CU2612</a></li>
+<li><a class="l3" href="#4.2铝AL2612（简要）">4.2 铝 AL2612（简要）</a></li>
+<li><a class="l2" href="#五、黑色系（焦煤写透；螺纹/热卷/铁矿/焦炭给供需）">五、黑色系（焦煤写透；螺纹/热卷/铁矿/焦炭给供需）</a></li>
+<li><a class="l3" href="#5.1焦煤JM2701（重点）">5.1 焦煤 JM2701（重点）</a></li>
+<li><a class="l3" href="#5.2螺纹RB2701">5.2 螺纹 RB2701</a></li>
+<li><a class="l3" href="#5.3热卷HC2701">5.3 热卷 HC2701</a></li>
+<li><a class="l3" href="#5.4铁矿I2701">5.4 铁矿 I2701</a></li>
+<li><a class="l3" href="#5.5焦炭J2701">5.5 焦炭 J2701</a></li>
+<li><a class="l2" href="#六、生猪LH2701">六、生猪 LH2701</a></li>
+<li><a class="l3" href="#1）基本面概况-4">1）基本面概况</a></li>
+<li><a class="l3" href="#2）分析逻辑-4">2）分析逻辑</a></li>
+<li><a class="l3" href="#3）技术面-4">3）技术面</a></li>
+<li><a class="l2" href="#七、棕榈油P2701-豆油分化">七、棕榈油 P2701 ｜ 豆油分化</a></li>
+<li><a class="l3" href="#7.1棕榈油P2701">7.1 棕榈油 P2701</a></li>
+<li><a class="l3" href="#7.2豆油Y2701与分化逻辑">7.2 豆油 Y2701 与分化逻辑</a></li>
+<li><a class="l2" href="#八、夜盘补记（2026-11-0921:00开盘，金十）">八、夜盘补记（2026-11-09 21:00 开盘，金十）</a></li>
+<li><a class="l2" href="#九、后续关注点与数据缺口">九、后续关注点与数据缺口</a></li>
+<li><a class="l3" href="#后续关注（按优先级）">后续关注（按优先级）</a></li>
+<li><a class="l3" href="#主要数据缺口（诚实列表）">主要数据缺口（诚实列表）</a></li>
+<li><a class="l3" href="#主要来源">主要来源</a></li>
+</ol>
+    </nav>
+    <article>
+      <header class="hero">
+        <p class="kicker">中国商品期货每日扫描</p>
+        <h1 class="title">2026年11月9日</h1>
+        <p class="lede">中国商品期货重点品种深度扫描（投研备忘）· 北京时间</p>
+        <div class="pills">
+          <span class="pill down"><em>涨跌宽度</em>16 涨 / 43 跌</span>
+          <span class="pill down"><em>商品指数</em>1556.66（-0.25%）</span>
+          <span class="pill down"><em>碳酸锂</em>-4.85%</span>
+          <span class="pill down"><em>夜盘燃油</em>跌超 6%</span>
+          <span class="pill up"><em>生猪</em>+1.91%</span>
+        </div>
+        <dl class="meta-grid"><dt>行情基准</dt><dd>日盘收盘 15:00（金融界/生意社交叉核对）</dd><dt>仓单口径</dt><dd>上期所能源/有色以<strong>金十日讯</strong>为准；棕榈油以<strong>同花顺仓单快讯</strong>为准；与奇货可查冲突处已注明并废弃奇货可查错误口径</dd><dt>补记</dt><dd>夜盘 21:00 开盘后油气链再度大幅低开（金十），文末单独标注；碳酸锂/生猪等无夜盘品种以日盘为准</dd><dt>定稿时点</dt><dd>约 2026-11-09 21:50 北京时间</dd></dl>
+      </header>
+      <h2 id="一、市场总览">一、市场总览</h2>
+<p>国内商品期货日盘<strong>跌多涨少（约 16 涨 / 43 跌）</strong>。中证商品期货价格指数 <strong>1556.66（-0.25%，-3.84 点）</strong>，中证商品期货指数 <strong>2159.58（-0.25%，-5.32 点）</strong>（新华财经/中国金融信息网，截至日盘收盘）。</p>
+<p><strong>今日主线有三条，且彼此强化：</strong></p>
+<ol>
+<li><strong>碳酸锂再度领跌</strong>：LC2701 收跌约 <strong>4.85%</strong>。前两日反弹中空头减仓释放后，枧下窝复产推进 + 海外发运兑现 + 11 月电池排产弱于预期，把“供增需弱、去库放缓”重新定价到盘面上；仓单继续增加，现货止涨回落。</li>
+<li><strong>油气化工链回吐中东地缘溢价</strong>：特朗普 8 日表态若美伊谈判有进展则“极不可能”恢复对伊大规模军事行动，油价及燃油、LPG、苯乙烯、纯苯、沥青等集体大跌；成本坍塌压过短期低库存叙事。<strong>夜盘 21:00 开盘后，这条主线进一步强化</strong>（燃油跌超 6%、SC 原油跌近 5%）。</li>
+<li><strong>结构分化而非全面空头</strong>：铜仓单急降、国内极低社库与高升水仍在；生猪更多是贴水修复 + 空头离场；棕榈油受马棕高库存预期与 11 月 10 日 MPOB 前定价压制，豆油因收储预期相对抗跌。黑色整体仍是“低供给、低需求、低库存”，驱动不强，焦煤因竞拍疲软与铁水下行跌幅居前。</li>
+</ol>
+<p>涨幅前列大致为原木（约 +1.96%）、生猪（+1.91%）、多晶硅、铂钯等；跌幅前列为碳酸锂、LPG、燃油、苯乙烯、纯苯、沥青、红枣等（新华财经商品日报）。</p>
+<hr />
+<h2 id="二、碳酸锂LC2701（今日领跌）">二、碳酸锂 LC2701（今日领跌）</h2>
+<p><strong>合约与定义</strong>：广州期货交易所碳酸锂期货主力 <strong>LC2701</strong>，报价单位元/吨，合约乘数 1 吨/手。</p>
+<p><strong>当日盘口（日盘）</strong><br />
+- 收盘 <strong>87480</strong>，较昨结 <strong>-4460（-4.85%）</strong>；较昨收约 <strong>-5380（约 -5.8%）</strong>（SMM/金融界）<br />
+- 开盘约 92200，最高约 92980，最低约 87260（SMM）<br />
+- 成交约 <strong>35.23 万手</strong>（环比约 -9.1%），持仓约 <strong>40.04 万手（+9104）</strong>——<strong>增仓下跌</strong>，空头主导而非单纯多头离场<br />
+- 前 20 席位（全月份加总）：多单约 44.66 万手、空单约 47.92 万手，净空约 <strong>-3.26 万手</strong>，净空较上日扩大约 6170 手（同花顺期货通 19:37）</p>
+<h3 id="1）基本面概况" class="sub fund">1）基本面概况</h3>
+<p><strong>供应</strong><br />
+- 周度产量（SMM，华泰期货周报 11/9）：碳酸锂周度总产量约 <strong>28200 吨</strong>（上周 27821），辉石路径产量上行是主增量。<br />
+- <strong>枧下窝复产</strong>：公开报道称宁德时代旗下枧下窝锂矿 11 月 9 日召开复产工作会议、目标 11 月完成复产；该矿满产量级约占国内月产量约一成量级（同花顺 7x24 引述口径约月产 1 万吨/占国内约 12.5%）。这把“远期供增”从传闻推进到可交易事件。<br />
+- 海外锂矿发运持续兑现（澳非资源到港），港口及贸易环节可售货源增加（同花顺收评综合）。</p>
+<p><strong>需求</strong><br />
+- 11 月电池/正极排产降幅超出此前预期；百川口径：磷酸铁锂产量环比约 -0.84%，三元约 -3.07%（华泰周报）。下游散单询价多、成交以刚需为主，意向采买价偏低（SMM 日评）。</p>
+<p><strong>库存</strong><br />
+- SMM 小样本现货库存约 <strong>50310 吨（环比 -831）</strong>；大样本约 56149（-1431）；更新口径合计库存约 125391（-2994）——<strong>仍在去库，但节奏显著放缓</strong>（前一期去库更猛）。<br />
+- Mysteel（新华财经引用）：本周样本总库存仅去库约 <strong>610 吨</strong>（前一周约 3120 吨），贸易商库存反增约 690 吨。<br />
+- <strong>交易所仓单</strong>：新华财经商品日报/东吴引用为 <strong>21720 手（+679）</strong>。另有新华财经快讯写“23760 手（+2040）”，与前者冲突；<strong>本备忘以商品日报与多数机构引用的 21720（+679）为主</strong>，并标注快讯口径待再核交易所原始日报。</p>
+<p><strong>利润 / 基差 / 现货</strong><br />
+- MMLC 电池级碳酸锂早盘中间价约 <strong>92950（-850）</strong>（新华财经）；SMM 电池级均价约 <strong>92500（-1100）</strong>（报价区间约 9.04–9.46 万）。<br />
+- 期现：现货仍高于期货，但贸易基差走弱、部分盐厂出货意愿增强（SMM）。自有矿一体化仍有利润，外购矿/代工受原料成本挤压（华泰）。</p>
+<p><strong>这些数字如何作用盘面</strong>：产量回升 + 复产事件把供给曲线右移预期钉死；排产走弱与去库放缓削弱“紧现实”叙事；仓单增加提高可交割筹码；增仓下跌说明空头在用仓位确认方向，而非多头被动止盈那么简单。</p>
+<h3 id="2）分析逻辑" class="sub logic">2）分析逻辑</h3>
+<p><strong>核心矛盾</strong>：短期是“反弹后的情绪与仓位再平衡”，中期仍是<strong>供增需弱下的宽松再定价</strong>。前两日巨量减仓曾释放空头抛压，但复产工作会议把供给冲击重新激活，多头追高意愿不足（缩量/随后增仓空）。</p>
+<p><strong>价格驱动</strong>：事件驱动（枧下窝）+ 周度供需验证（产量↑、去库↓、排产↓）为主；宏观与板块情绪为辅。</p>
+<p><strong>上沿约束</strong>：现货无法顺畅跟涨、去库无法重新加速、复产按计划推进——任一成立，反弹都难突破前高区域并转化为趋势。机构表述多为“高位震荡消化 → 若去库无法延续则重回寻底”（东吴/新华财经）。</p>
+<p><strong>下沿约束</strong>：现货仍有报价支撑、一体化成本垫、以及过度下跌后的空头回补；现金流成本公开量化框架多指向约 7 万元一线（第三方研究站），但<strong>那是模型成本，不是交易所官方数字</strong>。真正扭转格局需要：排产上修、去库重新加速、或复产延期/矿端扰动。</p>
+<h3 id="3）技术面" class="sub tech">3）技术面</h3>
+<p>（第三方公开研究站 AutoBotHub，生成时点约 11/9 13:34，午盘价附近；收盘更低，均线位置需以收盘后终端为准）<br />
+- 均线：约 <strong>MA5 89760 / MA10 90816 / MA20 94706</strong>，空头排列；收盘 87480 已明显位于 MA5 下方。<br />
+- 近 20 日区间约 <strong>86360–108260</strong>；收盘靠近区间下沿。<br />
+- 枢轴参考：PP≈89960，R1≈91620，S1≈86940；下方关注 <strong>86360（20 日低）</strong>、再下约 85280。<br />
+- 量价持仓：日盘成交仍大但较上日略缩；持仓 +9104 配合跌价 = 空头增仓特征。<br />
+- <strong>未取得官方 MACD 数值</strong>；结构上属跌破短期反弹高点后的回撤，能否在 8.6 万–8.7 万一带止跌，要看现货是否跟上以及仓单是否继续增。</p>
+<hr />
+<h2 id="三、能化/油气链">三、能化 / 油气链</h2>
+<div class="section-card">
+<h3 id="3.1原油SC2701">3.1 原油 SC2701</h3>
+
+<p><strong>合约</strong>：上海国际能源交易中心中质含硫原油 <strong>SC2701</strong>，元/桶。<br />
+<strong>日盘</strong>：收约 <strong>624（约 -0.91%）</strong>，成交约 6.0 万手，持仓约 2.3 万手（生意社/金投）。仓单约 366.6 万桶、持平（奇货可查/金十能源口径）。  </p>
+<p><strong>基本面</strong>：定价主线从“霍尔木兹/军事升级溢价”切回商品属性。特朗普缓和表态触发溢价回吐；同时伊朗媒体称未经授权航道石油走私被阻断等消息仍在，地缘扰动并未消失，只是方向一日一价（新华财经）。运费与保险费率是否实质回落，是溢价出清是否完成的观察指标（国投期货）。</p>
+<p><strong>分析逻辑</strong>：上沿=缓和叙事延续 + 风险偏好回落；下沿=霍尔木兹实质阻断/军事再升级。国内能化链条今日普遍跟跌，说明成本端传导已经打通。</p>
+<p><strong>技术面</strong>：日盘收跌；<strong>夜盘 21:00 开盘 SC 跌近 5%</strong>（金十），日盘跌幅不能代表夜盘风险。精确均线未从交易所终端取得，不虚构。</p>
+</div>
+<div class="section-card">
+<h3 id="3.2燃料油FU2701">3.2 燃料油 FU2701</h3>
+
+<p><strong>日盘</strong>：收 <strong>4140（-143，-3.34%）</strong>，成交约 <strong>78.3 万手</strong>，持仓约 <strong>16.2 万手</strong>（金融界/生意社）。  </p>
+<p><strong>仓单（重要更正）</strong>：<br />
+- <strong>金十上期所能源化工仓单日报 + 同花顺</strong>【仓单】快讯：燃油仓单 <strong>7870 吨，较上日持平</strong>。<br />
+- 奇货可查曾显示 <strong>-12950</strong> —— <strong>该口径作废，不以之为准</strong>。  </p>
+<p><strong>基本面 / 逻辑</strong>：高度跟随原油与地缘溢价回吐；成交活跃说明杠杆资金在油品链集中交易。低硫燃油（LU）仓库仓单金十报 <strong>0（-1000）</strong>，与高硫燃油仓单持平并存，反映交割品结构分化，但价格仍由原油 beta 主导。</p>
+<p><strong>技术面</strong>：日盘大阴线、放量；<strong>夜盘开盘跌超 6%</strong>（金十），短线波动极端。支撑/均线以夜盘走完后再标定更稳妥。</p>
+</div>
+<div class="section-card">
+<h3 id="3.3LPGPG2612">3.3 LPG PG2612</h3>
+
+<p><strong>日盘</strong>：收 <strong>6478（-234，-3.49%）</strong>，成交约 17.7 万手，持仓约 6.9 万手。仓单约 5406 持平（奇货可查）。  </p>
+<p><strong>基本面</strong>：新华财经称近期港口及工厂库存水平偏低；但深加工利润萎缩、成品油淡季抑制化工需求。民用气随气温下降或有季节性支撑。  </p>
+<p><strong>逻辑</strong>：短线是成本驱动（原油/丙烷）。库存偏低限制“深跌空间”的说法成立的前提是原油止跌；若原油夜盘续崩，低库存也难托底（今日苯乙烯已演示这一点）。<strong>夜盘开盘 LPG 跌近 4%</strong>（金十）。</p>
+</div>
+<div class="section-card">
+<h3 id="3.4苯乙烯EB2612">3.4 苯乙烯 EB2612</h3>
+
+<p><strong>日盘</strong>：收 <strong>8952（-318，-3.43%）</strong>，成交约 <strong>141 万手</strong>，持仓约 25.7 万手——全市场成交最活跃品种之一。  </p>
+<p><strong>基本面（同花顺收评综合）</strong>：<br />
+- 成本：美伊缓和预期下油价大跌，芳烃成本坍塌。<br />
+- 供应：浙石化 60 万吨装置重启；产量环比约 +1.13% 至约 31.35 万吨，产能利用率约 62.51%；中旬大沽 50 万、壳牌 70 万有重启计划。<br />
+- 库存：江苏港口库存约 <strong>3.76 万吨，较上周同期 +0.69 万吨（+22.5%）</strong>；工厂库存环比约 +17.6%。  </p>
+<p><strong>逻辑</strong>：<strong>成本给空间、供应给理由，低库存叙事失效</strong>。当累库与装置重启同时出现时，盘面不再给“绝对低库存溢价”。扭转条件：油价止跌 + 装置重启推迟/故障 + 港口重新去库。</p>
+<p><strong>技术面</strong>：放量长阴；精确均线未核到官方源。</p>
+</div>
+<div class="section-card">
+<h3 id="3.5沥青BU2701（含厂库仓单异动）">3.5 沥青 BU2701（含厂库仓单异动）</h3>
+
+<p><strong>日盘</strong>：收 <strong>4421（-134，-2.94%）</strong>，成交约 43.7 万手，持仓约 18.6 万手。五日跌幅约 <strong>-14.96%</strong>（同花顺）。  </p>
+<p><strong>仓单（金十，必须单独强调）</strong>：<br />
+- 仓库仓单 <strong>0（持平）</strong><br />
+- <strong>厂库仓单 41560 吨（+40000）</strong> —— 单日巨量注册，显著提高可交割供给预期  </p>
+<p><strong>基本面</strong>：11 月炼厂排产计划约 163.5 万吨，环比约 +3.7%（广州期货）；传统淡季需求刚需；社会库存此前仍有去化（同花顺 iFinD：11/6 社库约 28 万吨，-2.6 万吨），去库只能限制跌速，挡不住成本坍塌。  </p>
+<p><strong>逻辑</strong>：价格由原油 beta 主导；厂库仓单 +4 万吨是<strong>结构利空叠加</strong>，削弱“低库存=易涨”的单边想象。上沿=油价反弹；下沿=淡季需求更差之前的成本锚定。关注厂库仓单后续是否继续注册、以及仓单对应的现货流向。</p>
+</div>
+<div class="section-card">
+<h3 id="3.6甲醇/PTA/EG/PVC（略写但仍给逻辑）">3.6 甲醇 / PTA / EG / PVC（略写但仍给逻辑）</h3>
+
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>品种</th>
+<th>日盘收盘</th>
+<th>涨跌</th>
+<th>成交/持仓要点</th>
+<th>核心逻辑（公开源）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>甲醇 MA2701</td>
+<td>3194</td>
+<td>-0.53%</td>
+<td>成交约 <strong>263 万手</strong>全场第一，持仓约 87 万</td>
+<td>内地偏紧 vs 沿海累库分化；MTO 开工极低、需求疲软；反弹多为超跌修复，油价下跌压制高度（曲合/山金等）。<strong>夜盘开盘跌近 4%</strong>。</td>
+</tr>
+<tr>
+<td>PTA TA2701</td>
+<td>6050</td>
+<td>-0.07%</td>
+<td>成交约 108 万，持仓约 91 万</td>
+<td>聚酯有所回升但终端偏弱，开工下调后反弹高度受限（公开研报）。跟油弱于燃油链。</td>
+</tr>
+<tr>
+<td>EG EG2701</td>
+<td>4888</td>
+<td>-0.73%</td>
+<td>成交约 87 万；仓单约 3527（<strong>-800</strong>，奇货可查）</td>
+<td>供应收缩与港口累库并存，跟涨乏力。仓单下降是局部亮点，但难敌能化 beta。</td>
+</tr>
+<tr>
+<td>PVC V2701</td>
+<td>4931</td>
+<td>-0.94%</td>
+<td>成交约 94 万，持仓约 89 万；仓单约 11.1 万吨</td>
+<td>地产链需求偏弱，低位震荡；高仓单压制近月弹性。</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+</div>
+<h2 id="四、铜CU2612（仓单急降、国内外库存劈叉）-铝简要">四、铜 CU2612（仓单急降、国内外库存劈叉）｜铝简要</h2>
+<div class="section-card">
+<h3 id="4.1铜CU2612">4.1 铜 CU2612</h3>
+
+<p><strong>合约</strong>：上期所阴极铜 <strong>CU2612</strong>，元/吨，乘数 5 吨/手。<br />
+<strong>日盘</strong>：收 <strong>105500（+390，+0.37%）</strong>，最高约 106100、最低约 104580；成交约 <strong>12.2 万手</strong>，持仓约 <strong>19.6 万手（约 -9466）</strong>（金投/生意社）。</p>
+<p><strong>仓单</strong>：金十上期所有色仓单日报：<strong>2844 吨（-1483）</strong>。<br />
+注：部分第三方/前一日口径曾报 4327（-2247）等，<strong>11 月 9 日以金十日讯 2844（-1483）为准</strong>；奇货可查亦有不同数，已弃用冲突值。</p>
+<h4 id="1）基本面概况-2" class="sub fund">1）基本面概况</h4>
+<p><strong>供应 / 冶炼</strong><br />
+- 10 月电解铜产量约 <strong>109.08 万吨，环比 -5.11 万吨</strong>（正信期货早报）。<br />
+- 铜精矿 TC 维持深度负值约 <strong>-247 美元/干吨</strong>，矿端与冶炼端双重收缩（正信）。</p>
+<p><strong>需求 / 现货</strong><br />
+- 上海金属网 1# 电解铜均价约 <strong>110010（+450）</strong>；对近月升水约 <strong>2100–2600 元/吨</strong> 高位（SHMET，收评引用）。<br />
+- 高升水已出现负反馈：下游按需、部分企业减产/停炉保温意向（正信/SHMET）。</p>
+<p><strong>库存（劈叉核心）</strong><br />
+- 国内社库：Mysteel 11/9 约 <strong>6.39 万吨</strong>（较 11/2 -0.92 万吨），继续刷新年内低位；正信早报写约 <strong>6.25 万吨</strong>（周度口径，略有差异，同属极低水平）。<br />
+- LME：周内回升约 <strong>2.5 万吨至约 31.9 万吨</strong>，转为累库，增量集中美国仓（正信）。COMEX–LME 价差一度倒挂，关税驱动库存回流叙事压制情绪。<br />
+- 上期所仓单急降，强化“国内可交割货极紧”。</p>
+<p><strong>宏观</strong>：美国 10 月非农 +16.5 万远超预期，失业率至 4.1%，12 月加息概率升至约八成，美元与利率压制风险偏好（正信/广州期货）。</p>
+<h4 id="2）分析逻辑-2" class="sub logic">2）分析逻辑</h4>
+<p><strong>核心矛盾</strong>：<strong>海外累库 + 利率压制</strong> vs <strong>国内极低库存 + 高升水 + 负 TC</strong>。这是期现劈叉、内外劈叉，不是简单多空。<br />
+<strong>上沿</strong>：非农后的加息叙事、LME 累库、COMEX 投机净多连续削减（CFTC 至 11/3 当周）。<br />
+<strong>下沿</strong>：国内仓单/社库不累、升水维持、冶炼减产。<br />
+<strong>扭转条件</strong>：① 国内社库转为累库且升水坍塌 → 下沿打开；② 美联储加息预期证伪 + 海外去库 → 上沿打开。高升水负反馈是新增的需求侧风险，限制“逼空式”上涨。</p>
+<h4 id="3）技术面-2" class="sub tech">3）技术面</h4>
+<p>（AutoBotHub，约 11/9 13:19）<br />
+- 均线约 <strong>MA5 105748 / MA10 107085 / MA20 107984</strong>，空头排列；收盘 105500 贴近/略低于 MA5。<br />
+- 20 日区间约 <strong>104120–111000</strong>；枢轴 PP≈105447，R1≈106313，S1≈104943。<br />
+- 日盘缩量反弹、持仓下降，更像空头回补/修复，而非趋势反转。机构参考区间多见 <strong>10.3–10.9 万</strong>。</p>
+</div>
+<div class="section-card">
+<h3 id="4.2铝AL2612（简要）">4.2 铝 AL2612（简要）</h3>
+
+<p>收 <strong>23175（+95，+0.41%）</strong>，成交约 19.3 万手，持仓约 22.4 万手。<br />
+仓单金十：<strong>49933（-2055）</strong>。社库约 <strong>46.7 万吨（周环比约 -3.9 万吨）</strong>，延续去库；现货升水回落至零轴附近（正信）。逻辑是<strong>强现实、弱预期</strong>（海外低库存 vs 远月交易印尼/中东供应），今日韧性好于锌铅，但高度仍受宏观利率压制。</p>
+<hr />
+</div>
+<h2 id="五、黑色系（焦煤写透；螺纹/热卷/铁矿/焦炭给供需）">五、黑色系（焦煤写透；螺纹/热卷/铁矿/焦炭给供需）</h2>
+<div class="section-card">
+<h3 id="5.1焦煤JM2701（重点）">5.1 焦煤 JM2701（重点）</h3>
+
+<p><strong>合约</strong>：大商所焦煤 <strong>JM2701</strong>，元/吨，交易单位 60 吨/手。<br />
+<strong>日盘</strong>：收 <strong>1396（-18.5，-1.31%）</strong>；最高 1440、最低 1391.5；成交约 <strong>74.70 万手</strong>，持仓约 <strong>44.47 万手（约 -556）</strong>（兰格钢铁）。结算价 1414.5。</p>
+<h4 id="1）基本面概况-3" class="sub fund">1）基本面概况</h4>
+<p><strong>供应</strong><br />
+- 523 家样本：原煤日产约 160.30（-1.44）万吨，精煤日产约 <strong>66.14（-1.70）万吨</strong>——产量未明显增，但矿山库存转累（光大/南华）。<br />
+- 矿山精煤库存约 <strong>242.26（+20.42）万吨</strong>，原煤库存约 <strong>425.27（+13.59）万吨</strong> → <strong>下游购买意愿弱</strong>的直接证据。<br />
+- 蒙煤：通关有提至 1200 车/日的协调预期；实际 11/3 曾冲高至 830 车后回落，周均约 646 车，较上周 605 车边际回升（南华）。<br />
+- 竞拍（Mysteel，截至 11/9 上午）：山西炼焦煤挂牌约 <strong>21.07 万吨，成交 18.5 万吨，流拍率 12.2%</strong>，成交疲软、典型矿点下跌或流拍。</p>
+<p><strong>需求</strong><br />
+- 247 家钢厂日均铁水 <strong>230.69（-1.18）万吨</strong>，连续走弱；采暖季环保与检修预期下仍有下行压力。<br />
+- 焦企对焦煤偏刚需，焦炭微亏抑制原料采购积极性。</p>
+<p><strong>库存</strong><br />
+- 焦煤总库存周度去库约 <strong>23.61 万吨</strong>（结构：矿山累库、独立焦企与钢厂去库）——总量去库掩盖了<strong>矿端被动累库</strong>。<br />
+- 16 港炼焦煤库存约 <strong>746.28（+21.54）万吨</strong>（南华）。<br />
+- 交易所仓单报 0（奇货可查）。</p>
+<p><strong>现货 / 基差</strong><br />
+- 周内柳林低硫主焦 -50、山西中硫主焦 -100；蒙煤同步下跌（光大）。南华引用临汾安泽低硫主焦约 2250（累降 140）量级——期现仍有贴水修复空间，但现货竞拍弱限制反弹质量。</p>
+<h4 id="2）分析逻辑-3" class="sub logic">2）分析逻辑</h4>
+<p><strong>核心矛盾</strong>：保供复产方向未变，但<strong>“复产不复量 + 需求主动去库 + 蒙煤预期”</strong>让价格更敏感于竞拍与铁水，而非简单供需缺口。<br />
+<strong>驱动</strong>：竞拍流拍率、铁水、蒙煤通车、冬储预期。<br />
+<strong>上沿</strong>：铁水止跌并回升、竞拍重新抢货、冬储落地。南华给出的震荡上沿参考约 <strong>1500</strong>。<br />
+<strong>下沿</strong>：矿端进一步主动限产、蒙煤通关证伪、宏观情绪驱动黑色共振。下沿参考多见 <strong>1300–1350</strong> 一带。<br />
+<strong>扭转</strong>：需要看到矿山库存由累转去、流拍率下降、铁水止跌三者至少其二。</p>
+<h4 id="3）技术面-3" class="sub tech">3）技术面</h4>
+<p>（AutoBotHub，约 11/9 13:23；收盘 1396）<br />
+- 均线约 <strong>MA5 1391 / MA10 1401 / MA20 1427</strong>，空头排列；收盘贴着 MA5、在 MA10/MA20 之下。<br />
+- 20 日区间约 <strong>1352–1582</strong>；枢轴 PP≈1410，R1≈1427，S1≈1381。<br />
+- 日内跌破枢轴，最低 1391.5 接近 S1 区域；成交高于近 5 日均量，空头日内占优。<br />
+- 机构波动区间表述：焦煤约 <strong>1300–1500</strong>（南华）。</p>
+</div>
+<div class="section-card">
+<h3 id="5.2螺纹RB2701">5.2 螺纹 RB2701</h3>
+
+<p>收 <strong>3037（-4，-0.13%）</strong>，开 3045、高 3051、低 3031；持仓约 <strong>168.05 万手（约 -1477）</strong>（兰格）。<br />
+仓单同花顺：<strong>55731 吨持平</strong>（近一周约 -1494，近一月约 -6.1 万吨）。  </p>
+<p>周度（光大，截至约 11/8 当周）：产量 <strong>185.9 万吨（+4.72）</strong>，社库 <strong>334.98（-15.05）</strong>，厂库 <strong>147.39（+0.15）</strong>，表需 <strong>200.8（-5.27）</strong>。低供给、低需求、低库存，<strong>产量回升 + 表需回落 + 库存降幅收窄</strong>，驱动不强。成本端矿焦有支撑；国常会政策落地表述与“十五五”基建规划对情绪有扰动但未改基本面。</p>
+</div>
+<div class="section-card">
+<h3 id="5.3热卷HC2701">5.3 热卷 HC2701</h3>
+
+<p>收 <strong>3186（-20，-0.62%）</strong>，成交约 41 万手，持仓约 160 万手。仓单约 20.1 万吨（-3535，奇货可查）。<br />
+周度：产量 291.28（+3.19），社库 351.31（-9.17），厂库 71（+3.28），表需 297.17（+1.61）。乘用车/重卡销售同比仍弱；华北环保限产对供应有边际扰动。跌幅大于螺纹，板材需求亮点不足。</p>
+</div>
+<div class="section-card">
+<h3 id="5.4铁矿I2701">5.4 铁矿 I2701</h3>
+
+<p>收 <strong>687.5（-2，-0.29%）</strong>，成交约 22 万手，持仓约 52.7 万手。<br />
+供应：全球发运 3548 万吨（+180.6），47 港到港 3014 万吨（<strong>+653.8</strong>）——到港压力明显。<br />
+需求：铁水 230.69（-1.18）；钢厂盈利率约 <strong>11.26%</strong> 持平低位。<br />
+库存：47 港 <strong>17533.2 万吨（+244.43，同比 +1909）</strong>；钢厂进口矿 8561.48（-40.1）。<strong>港口累库 + 铁水下行 = 宽松格局未变</strong>。</p>
+</div>
+<div class="section-card">
+<h3 id="5.5焦炭J2701">5.5 焦炭 J2701</h3>
+
+<p>收 <strong>1924.5（-12.5，-0.65%）</strong>，成交约 3.2 万手（相对清淡），持仓约 4.3 万手。<br />
+焦企现货利润约亏损 <strong>10 元/吨</strong>；独立焦企日产 60.44（-0.64）；全样本焦炭库存周去库约 <strong>27.94 万吨</strong>。钢厂有提降意愿，盘面跟随焦煤与铁水，弹性小于焦煤。</p>
+<hr />
+</div>
+<h2 id="六、生猪LH2701">六、生猪 LH2701</h2>
+<p><strong>合约</strong>：大商所生猪 <strong>LH2701</strong>，元/吨。<br />
+<strong>日盘</strong>：开 9240、高 9430、低 9230、收 <strong>9350</strong>；较结算价 <strong>+185</strong>（生意社；涨跌幅约 <strong>+1.91%</strong>）；成交约 <strong>15.79 万手</strong>，持仓约 <strong>16.21 万手（-11264）</strong>——<strong>涨价减仓</strong>，符合空头回补/离场特征。</p>
+<h3 id="1）基本面概况-4" class="sub fund">1）基本面概况</h3>
+<p><strong>供应</strong>：样本 10 月商品猪出栏仍高、11 月计划出栏环比继续抬升；出栏均重约 <strong>125.22 kg</strong> 继续上行，放大供给（华泰期货 11/9）。集团出栏节奏略慢但存栏充裕。  </p>
+<p><strong>需求</strong>：气温下行带来腌腊窗口预期，但白条走货不及预期；屠宰开工仍偏低。<br />
+- 新华财经引光大：屠宰开工约 <strong>31.08%</strong>，冻品库容约 <strong>24.69%</strong>（同期高位）。<br />
+- 华泰周度样本：开工率约 <strong>30.94%</strong>，冻品库容约 <strong>31.23%（-0.37pct）</strong>，鲜销率约 <strong>81.48%</strong>。<br />
+两套样本数值不同，<strong>共同指向：开工不高、冻品不低、需求未验证</strong>。  </p>
+<p><strong>现货 / 基差</strong>：全国外三元均价 Mysteel 约 <strong>8.52 元/kg（-0.23%）</strong>；生意社基准价约 8.95 元/kg，基差约 <strong>-400 元/吨</strong>（现货-期货）。期价仍升水/现货偏弱结构下的修复行情。养殖利润仍深亏（自繁自养约 -387 元/头量级，Mysteel）。</p>
+<h3 id="2）分析逻辑-4" class="sub logic">2）分析逻辑</h3>
+<p>光大/新华财经的判断可直接采信为框架：<strong>本轮反弹底层是期货贴水修复 + 空头离场，不是现货反转</strong>。现货仍在“越跌越卖”负反馈中，低价冻品锚定鲜品上方。<br />
+<strong>上沿</strong>：没有连续可验证的现货止跌前，反弹高度有限。<br />
+<strong>下沿</strong>：腌腊订单实质放量、屠宰开工连续回升、冻品去库加速。<br />
+<strong>扭转</strong>：供给端能繁去化传导到出栏（滞后），或需求端出现超季节性备货。</p>
+<h3 id="3）技术面-4" class="sub tech">3）技术面</h3>
+<p>持仓连续下降配合反弹，属空头离场驱动的修复波。上方前高/密集成交区构成压力（日内高点 9430 已显示上方抛压）。精确均线未取到官方源；结构上更接近下跌趋势中的反弹浪，而非趋势反转确认。</p>
+<hr />
+<h2 id="七、棕榈油P2701-豆油分化">七、棕榈油 P2701 ｜ 豆油分化</h2>
+<div class="section-card">
+<h3 id="7.1棕榈油P2701">7.1 棕榈油 P2701</h3>
+
+<p><strong>日盘</strong>：收 <strong>8583（-167，-1.91%）</strong>，成交约 42.3 万手，持仓约 55.0 万手；五日跌幅约 <strong>-7.69%</strong>（同花顺）。  </p>
+<p><strong>仓单（重要更正）</strong>：同花顺【仓单】快讯——大商所棕榈油仓单 <strong>1644，较上日持平</strong>。奇货可查曾显 <strong>+1000</strong>，<strong>作废</strong>。</p>
+<h4 id="1）基本面概况-5" class="sub fund">1）基本面概况</h4>
+<p><strong>产地</strong>：路透调查预估马来 10 月末库存约 <strong>375 万吨（+6.8%）</strong>，连续第 7 个月累库并创历史新高；MPOA 称 10 月产量环比 +5.53% 至约 223 万吨，与 SPPOMA 口径有分歧；ITS/AmSpec 显示 10 月出口环比大增（约 +45% 量级），但不足以阻止累库预期（南华）。<strong>11 月 10 日 MPOB 月报</strong>是定价催化剂。SPPOMA 显示 11/1–5 产量环比 -9.71%，减产是否兑现待验证。今日马盘因屠妖节休市，内盘更多消化上周五马棕大跌（约 -2.7%）与库存预期。</p>
+<p><strong>国内</strong>：商业库存约 <strong>120–123 万吨</strong> 量级（正信约 120；南华称超 120、同比逾一倍；华泰约 119.7 万吨同比 +102%），买船到港下累库压力未解。广州 24 度现货约 8640，基差 P2701+8 附近（南华）——期现同步走弱。</p>
+<p><strong>需求 / 替代</strong>：原油回落削弱生柴价值；印度节后需求回落；棕油对豆油性价比仍一般。</p>
+<h4 id="2）分析逻辑-5" class="sub logic">2）分析逻辑</h4>
+<p>近端交易<strong>弱现实（产地+国内双高库存）</strong>，远端仍留有减产/生柴/天气升水，但今日盘面明确在兑现近端。豆棕价差近月已基本平水、收敛未结束。<br />
+<strong>上沿</strong>：MPOB 库存不及预期 / 产量低于预期、原油止跌、国内库存拐点。<br />
+<strong>下沿</strong>：胀库停收、抛压、原油续跌。机构多给 8400–8800 震荡或偏弱描述。</p>
+<h4 id="3）技术面-5" class="sub tech">3）技术面</h4>
+<p>五日连续偏弱、领跌油脂；精确均线未核官方源。关键观察 MPOB 后能否止跌，以及 8500/8400 整数关口的持仓变化。</p>
+</div>
+<div class="section-card">
+<h3 id="7.2豆油Y2701与分化逻辑" class="sub logic">7.2 豆油 Y2701 与分化逻辑</h3>
+
+<p>收 <strong>8657（-62，-0.71%）</strong>，明显抗跌于棕榈油。张家港一级豆油现货约 8990，基差 Y2701+<strong>335</strong>（南华）——现货升水走扩。<br />
+<strong>分化原因</strong>：① 中储粮 11/9 再收储约 <strong>20 万吨豆油</strong>（饲料行业信息网/南华）；② 棕榈油库存矛盾更尖锐；③ 美豆丰产与高压榨仍在，故豆油也难单边上行，只是跌幅受限。豆粕 M2701 收 3075（-0.84%），持仓约 192 万手，跟随油料偏弱。</p>
+<hr />
+</div>
+<h2 id="八、夜盘补记（2026-11-0921:00开盘，金十）">八、夜盘补记（2026-11-09 21:00 开盘，金十）</h2>
+<p>日盘定稿后夜盘开盘，<strong>油气链低开幅度显著大于日盘跌幅</strong>，需单独跟踪，不可把日盘收盘当作当日最终风险：</p>
+<ul>
+<li>燃料油跌超 <strong>6%</strong>  </li>
+<li>SC 原油跌近 <strong>5%</strong>  </li>
+<li>低硫燃油跌超 <strong>4%</strong>  </li>
+<li>甲醇、LPG 跌近 <strong>4%</strong>  </li>
+<li>聚丙烯、丙烯、纯苯跌超 <strong>3%</strong>  </li>
+<li>涨幅方面：沪金涨超 <strong>1%</strong>  </li>
+</ul>
+<p>碳酸锂、生猪、焦煤等无夜盘或未在该快讯点名的品种，仍以日盘逻辑为主。若原油夜盘跌势延续，次日能化日盘仍有补跌/高波动风险。</p>
+<hr />
+<h2 id="九、后续关注点与数据缺口">九、后续关注点与数据缺口</h2>
+<h3 id="后续关注（按优先级）">后续关注（按优先级）</h3>
+<ol>
+<li><strong>11 月 10 日 MPOB</strong> 马棕 10 月产量/出口/库存是否确认“历史新高累库”。  </li>
+<li><strong>原油/地缘</strong>：美伊谈判表述 vs 霍尔木兹通行实质；运费与保险费率。夜盘低开后的欧美盘衔接。  </li>
+<li><strong>碳酸锂</strong>：枧下窝复产节点、周度去库是否继续放缓、仓单是否续增、现货能否跟上。  </li>
+<li><strong>铜</strong>：国内社库/升水能否维持；LME 是否继续累库；非农后的利率预期是否缓和。  </li>
+<li><strong>焦煤</strong>：竞拍流拍率、铁水、蒙煤通车、冬储订单。  </li>
+<li><strong>生猪</strong>：屠宰开工与冻品库容的周度验证；腌腊订单是否落地。  </li>
+<li><strong>沥青厂库仓单</strong> 41560（+4 万）后续是否继续注册。</li>
+</ol>
+<h3 id="主要数据缺口（诚实列表）">主要数据缺口（诚实列表）</h3>
+<ul>
+<li>多数品种<strong>当日精确基差</strong>未全覆盖（仅铜、棕榈、豆油、生猪等有抽样）。  </li>
+<li>社会库存/开工多为<strong>周度</strong>（截至约 11/6–11/8），非逐日。  </li>
+<li><strong>价格季节性历史分位</strong>库尚未建成。  </li>
+<li>技术面均线/MACD：仅碳酸锂、焦煤、沪铜从第三方研究站取得午盘附近估算，<strong>非交易所官方终端收盘后复权均线</strong>；其余品种明确缺失，不虚构。  </li>
+<li>碳酸锂仓单存在 <strong>21720（+679）</strong> 与快讯 <strong>23760（+2040）</strong> 冲突，待用广期所原始日报最终钉死。  </li>
+<li>奇货可查与金十/同花顺的历史冲突提醒：燃油、棕榈油已更正；其他仅有奇货可查的仓单（甲醇/PTA 等）置信度低于金十覆盖品种。</li>
+</ul>
+<h3 id="主要来源">主要来源</h3>
+<p>新华财经商品日报与跌幅榜（11/9）、金十上期所仓单日报（能源/有色）、同花顺仓单快讯、金融界/生意社收盘表、SMM 碳酸锂日评、华泰/光大/正信/南华/东吴等公开日报与周报、兰格钢铁收盘快讯、Mysteel 竞拍与库存转引、AutoBotHub 公开研究记录（均线，标注时点）、金十夜盘开盘快讯（21:00:02）。</p>
+      <footer class="disclaimer">
+        <p>公开信息整理，非投资建议；缺数据处标明缺口，不编造数字 仓单以上期所金十日讯、同花顺快讯为准；奇货可查与之冲突的燃油、棕榈油仓单口径已作废。技术面均线若标注来自第三方午盘估算，则以收盘后终端为准。</p>
+      </footer>
+    </article>
+  </div>
+  <script>
+(function () {
+  const root = document.documentElement;
+  const saved = localStorage.getItem("scan-theme");
+  if (saved) root.setAttribute("data-theme", saved);
+
+  const themeBtn = document.getElementById("theme-toggle");
+  const tocBtn = document.getElementById("toc-toggle");
+  const toc = document.getElementById("toc");
+
+  function labelTheme() {
+    const dark = isDark();
+    themeBtn.textContent = dark ? "浅色" : "深色";
+  }
+  function isDark() {
+    if (root.getAttribute("data-theme") === "dark") return true;
+    if (root.getAttribute("data-theme") === "light") return false;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  themeBtn.addEventListener("click", function () {
+    const next = isDark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem("scan-theme", next);
+    labelTheme();
+  });
+  labelTheme();
+
+  tocBtn.addEventListener("click", function () {
+    toc.classList.toggle("open");
+  });
+  toc.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", function () { toc.classList.remove("open"); });
+  });
+
+  const links = Array.from(toc.querySelectorAll("a[href^='#']"));
+  const map = links.map(function (a) {
+    const id = decodeURIComponent(a.getAttribute("href").slice(1));
+    return { a: a, el: document.getElementById(id) };
+  }).filter(function (x) { return x.el; });
+
+  function sync() {
+    let current = map[0];
+    const y = window.scrollY + 90;
+    map.forEach(function (item) {
+      if (item.el.offsetTop <= y) current = item;
+    });
+    links.forEach(function (a) { a.classList.remove("active"); });
+    if (current) current.a.classList.add("active");
+  }
+  document.addEventListener("scroll", sync, { passive: true });
+  sync();
+})();
+</script>
+</body>
+</html>
