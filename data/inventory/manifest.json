@@ -64,7 +64,7 @@
   "BU": {
     "ok": true,
     "years": "2018-2026",
-    "n": 2144,
+    "n": 2299,
     "unit": "吨",
     "last": 66560.0,
     "sources": [
@@ -90,7 +90,7 @@
   "TA": {
     "ok": true,
     "years": "2018-2026",
-    "n": 4435,
+    "n": 4604,
     "unit": "张",
     "last": 23189.0,
     "sources": [
@@ -168,7 +168,7 @@
   "RB": {
     "ok": true,
     "years": "2018-2026",
-    "n": 2391,
+    "n": 2546,
     "unit": "吨",
     "last": 55731.0,
     "sources": [
@@ -316,7 +316,7 @@
   "AU": {
     "ok": true,
     "years": "2018-2026",
-    "n": 1005,
+    "n": 1177,
     "unit": "千克",
     "last": 118404.0,
     "sources": [
@@ -681,7 +681,8 @@
     "unit": "张",
     "last": 0.0,
     "sources": [
-      "99qh"
+      "99qh",
+      "receipt"
     ],
     "svg": "scans/charts/AP_season.svg"
   },
