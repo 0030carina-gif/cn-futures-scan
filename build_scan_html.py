@@ -14,9 +14,13 @@ sys.path.insert(0, "/tmp/mdenv/lib/python3.13/site-packages")
 import markdown
 
 ROOT = Path(__file__).resolve().parent
-SRC = ROOT / "scans" / "2026-11-09.md"
 OUT = ROOT / "index.html"
-OUT_DATED = ROOT / "scans" / "2026-11-09.html"
+WEEKDAYS = "一二三四五六日"
+
+
+def latest_md_date() -> str:
+    dates = sorted(p.stem for p in (ROOT / "scans").glob("20??-??-??.md"))
+    return dates[-1]
 
 CSS = r"""
 :root {
@@ -769,8 +773,26 @@ def _chart_block(codes: list[str]) -> str:
     return '\n<div class="season-chart-group">\n' + "\n".join(frags) + "\n</div>\n"
 
 
+def inject_marker_charts(html: str) -> tuple[str, int]:
+    """Replace <p>[[chart:CU,AL]]</p> markers with inline seasonal charts."""
+    n = 0
+
+    def repl(m):
+        nonlocal n
+        codes = [c.strip() for c in m.group(1).split(",") if c.strip()]
+        n += 1
+        return _chart_block(codes) or ""
+
+    html = re.sub(r"<p>\s*\[\[chart:([A-Za-z0-9_,\s]+)\]\]\s*</p>", repl, html)
+    html = re.sub(r"\[\[chart:([A-Za-z0-9_,\s]+)\]\]", repl, html)
+    return html, n
+
+
 def inject_season_charts(html: str) -> str:
     """Insert seasonal charts after inventory/receipt discussion inside each variety section."""
+    html, n = inject_marker_charts(html)
+    if n:
+        return html
     used: set[str] = set()
     # Work on full HTML with look-ahead: find heading, then search forward until next same-or-higher heading
     for key, codes, anchors in CHART_PLACEMENTS:
@@ -814,18 +836,32 @@ def inject_season_charts(html: str) -> str:
 
 
 
-def build() -> Path:
+def history_links(current: str, prefix: str) -> str:
+    dates = sorted((p.stem for p in (ROOT / "scans").glob("20??-??-??.html")), reverse=True)
+    if current not in dates:
+        dates = sorted(set(dates + [current]), reverse=True)
+    items = []
+    for d in dates:
+        wd = WEEKDAYS[datetime.strptime(d, "%Y-%m-%d").weekday()]
+        label = f"{d}（周{wd}）" + ("· 本期" if d == current else "")
+        items.append(f'<li><a href="{prefix}{d}.html">{label}</a></li>')
+    return "<ol>" + "".join(items) + "</ol>"
+
+
+def build(date: str | None = None) -> Path:
+    date = date or latest_md_date()
+    SRC = ROOT / "scans" / f"{date}.md"
+    OUT_DATED = ROOT / "scans" / f"{date}.html"
     raw = SRC.read_text(encoding="utf-8")
     meta, body_md = parse_front(raw)
     conv = markdown.Markdown(extensions=["tables", "sane_lists", "nl2br"])
     body = conv.convert(body_md)
     body, toc = add_heading_ids(body)
     body = classify_subs(body)
-    date = SRC.stem.replace("-bias", "")
-    if date.startswith("scan-"):
-        date = date[len("scan-"):]
-    # SRC is like scans/2026-11-09.md
-    date = SRC.stem
+    bias_path = ROOT / "scans" / f"{date}-bias.json"
+    page = {}
+    if bias_path.exists():
+        page = json.loads(bias_path.read_text(encoding="utf-8")).get("page", {})
     bias_items = load_bias_items(date)
     body, toc = apply_bias(body, toc, bias_items)
     body = wrap_tables(body)
@@ -836,21 +872,35 @@ def build() -> Path:
         f"<dt>{k}</dt><dd>{v}</dd>" for k, v in meta["fields"] if k != "声明"
     )
     disclaimer = next((v for k, v in meta["fields"] if k == "声明"), "公开信息整理，非投资建议。")
+    dt = datetime.strptime(date, "%Y-%m-%d")
+    wd = WEEKDAYS[dt.weekday()]
+    when = page.get("when") or f"{date} 周{wd}"
+    pills = "".join(
+        f'<span class="pill {p.get("dir", "")}"><em>{p["label"]}</em>{p["value"]}</span>'
+        for p in page.get("pills", [])
+    )
+    footer_extra = page.get("footer", "")
 
-    html = f"""<!DOCTYPE html>
+    def render(prefix: str) -> str:
+        return f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>期货全市场扫描 · 2026-11-09</title>
-  <style>{CSS}</style>
+  <title>期货全市场扫描 · {date}</title>
+  <style>{CSS}
+nav.toc .hist {{ margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line); }}
+nav.toc .hist ol a {{ font-size: 12px; }}
+.archive ol {{ list-style: none; padding-left: 0; }}
+.archive li {{ margin: 0 0 4px; }}
+</style>
 </head>
 <body>
   <div class="topbar">
     <div class="brand">
       <span class="mark">期货全市场扫描</span>
-      <span class="when">2026-11-09 周一 · 日盘 + 夜盘补记</span>
+      <span class="when">{when}</span>
     </div>
     <div class="tools">
       <button class="toc-toggle" id="toc-toggle" type="button">目录</button>
@@ -861,24 +911,23 @@ def build() -> Path:
     <nav class="toc" id="toc">
       <h2>目录</h2>
       {toc_html(toc)}
+      <div class="hist"><h2>历史期次</h2>{history_links(date, prefix)}</div>
     </nav>
     <article>
       <header class="hero">
         <p class="kicker">中国商品期货每日扫描</p>
-        <h1 class="title">2026年11月9日</h1>
-        <p class="lede">中国商品期货重点品种深度扫描（投研备忘）· 北京时间</p>
-        <div class="pills">
-          <span class="pill down"><em>涨跌宽度</em>16 涨 / 43 跌</span>
-          <span class="pill down"><em>商品指数</em>1556.66（-0.25%）</span>
-          <span class="pill down"><em>碳酸锂</em>-4.85%</span>
-          <span class="pill down"><em>夜盘燃油</em>跌超 6%</span>
-          <span class="pill up"><em>生猪</em>+1.91%</span>
-        </div>
+        <h1 class="title">{dt.year}年{dt.month}月{dt.day}日（周{wd}）</h1>
+        <p class="lede">{meta.get("subtitle") or "中国商品期货重点品种深度扫描（投研备忘）· 北京时间"}</p>
+        <div class="pills">{pills}</div>
         <dl class="meta-grid">{fields}</dl>
       </header>
       {body}
+      <section class="archive">
+        <h2 id="历史期次">历史期次</h2>
+        {history_links(date, prefix)}
+      </section>
       <footer class="disclaimer">
-        <p>{disclaimer} 仓单以上期所金十日讯、同花顺快讯为准；奇货可查与之冲突的燃油、棕榈油仓单口径已作废。技术面均线若标注来自第三方午盘估算，则以收盘后终端为准。</p>
+        <p>{disclaimer} {footer_extra}</p>
       </footer>
     </article>
   </div>
@@ -886,14 +935,19 @@ def build() -> Path:
 </body>
 </html>
 """
-    OUT.parent.mkdir(parents=True, exist_ok=True)
+
     OUT_DATED.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(html, encoding="utf-8")
-    OUT_DATED.write_text(html, encoding="utf-8")
-    print(f"wrote {OUT} ({OUT.stat().st_size} bytes)")
-    print(f"wrote {OUT_DATED}")
-    return OUT
+    OUT_DATED.write_text(render(""), encoding="utf-8")
+    if date == latest_md_date():
+        OUT.write_text(render("scans/"), encoding="utf-8")
+        print(f"wrote {OUT} ({OUT.stat().st_size} bytes)")
+    print(f"wrote {OUT_DATED} ({OUT_DATED.stat().st_size} bytes)")
+    return OUT_DATED
 
 
 if __name__ == "__main__":
-    build()
+    import argparse
+    ap = argparse.ArgumentParser(description="Build daily scan HTML from scans/YYYY-MM-DD.md")
+    ap.add_argument("--date", help="YYYY-MM-DD (default: latest scans/*.md)")
+    a = ap.parse_args()
+    build(a.date)

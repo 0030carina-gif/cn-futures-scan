@@ -1,33 +1,803 @@
 {
-  "asof": "2026-11-09",
-  "year_colors": {
-    "2026": "#c0392b",
-    "2025": "#7d3c98",
-    "2024": "#d4a017",
-    "2023": "#1e7a52",
-    "2022": "#2f6fed"
+ "asof": "2026-11-09",
+ "year_colors": {
+  "2026": "#c0392b",
+  "2025": "#7d3c98",
+  "2024": "#d4a017",
+  "2023": "#1e7a52",
+  "2022": "#2f6fed"
+ },
+ "older_color": "#9a9488",
+ "symbols": {
+  "LC": {
+   "name": "碳酸锂",
+   "title": "碳酸锂仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "em",
+    "99"
+   ],
+   "anchor": null,
+   "anchor_note": "备忘主口径 21720（+679）；东财/快讯 11/9 为 23760（+2040）",
+   "insert_after": [
+    "库存",
+    "交易所仓单"
+   ],
+   "section_match": [
+    "碳酸锂"
+   ],
+   "note": "广期所注册仓单，单位手；99期货网广期所接口返回空、广期所官网对本机返回500，暂仅有东方财富近3个月序列，多年季节对比待补"
   },
-  "older_color": "#9a9488",
-  "symbols": {
-    "LC": {"name": "碳酸锂", "title": "碳酸锂仓单季节性", "unit": "手", "unit_scale": 1, "source_pref": ["em", "99"], "anchor": 21720, "anchor_note": "备忘主口径 21720（+679）；东财/快讯 11/9 为 23760（+2040）", "insert_after": ["库存", "交易所仓单"], "section_match": ["碳酸锂"]},
-    "SC": {"name": "原油", "title": "原油仓单季节性", "unit": "万桶", "unit_scale": 10000, "source_pref": ["receipt", "99"], "anchor": 3666000, "section_match": ["原油 SC"]},
-    "FU": {"name": "燃料油", "title": "燃料油仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["receipt", "99"], "anchor": 7870, "section_match": ["燃料油 FU"]},
-    "PG": {"name": "LPG", "title": "LPG仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 5406, "section_match": ["LPG PG"]},
-    "EB": {"name": "苯乙烯", "title": "苯乙烯仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": null, "section_match": ["苯乙烯 EB"]},
-    "BU": {"name": "沥青", "title": "沥青仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["receipt", "99"], "anchor": 41560, "口径": "交易所注册仓单合计（含厂库）；11/9 仓库0 + 厂库41560", "section_match": ["沥青 BU"]},
-    "MA": {"name": "甲醇", "title": "甲醇仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 5011, "section_match": ["甲醇 / PTA", "甲醇 / PTA / EG / PVC"]},
-    "TA": {"name": "PTA", "title": "PTA仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["em", "99"], "anchor": 3197, "section_match": ["甲醇 / PTA"]},
-    "EG": {"name": "乙二醇", "title": "乙二醇仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 3327, "section_match": ["甲醇 / PTA"]},
-    "V": {"name": "PVC", "title": "PVC仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 111000, "section_match": ["甲醇 / PTA"]},
-    "CU": {"name": "铜", "title": "铜仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["receipt", "99", "em"], "anchor": 2844, "section_match": ["铜 CU2612", "4.1 铜"]},
-    "AL": {"name": "铝", "title": "铝仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["receipt", "99", "em"], "anchor": 49933, "section_match": ["铝 AL", "4.2 铝"]},
-    "JM": {"name": "焦煤", "title": "焦煤仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 0, "note": "交易所仓单长期多为 0，季节图仅供参考；社库/港口库存另见正文", "section_match": ["焦煤 JM"]},
-    "RB": {"name": "螺纹钢", "title": "螺纹钢仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["receipt", "99"], "anchor": 55731, "note": "以交易所/同花顺仓单为准；99期货网近月口径偏低已弃用冲突值", "section_match": ["螺纹 RB"]},
-    "HC": {"name": "热卷", "title": "热轧卷板仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["receipt", "99", "em"], "anchor": 199104, "section_match": ["热卷 HC"]},
-    "I": {"name": "铁矿石", "title": "铁矿石仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 3450, "note": "交易所注册仓单（吨），非47港社会库存", "section_match": ["铁矿 I"]},
-    "J": {"name": "焦炭", "title": "焦炭仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 999, "section_match": ["焦炭 J"]},
-    "LH": {"name": "生猪", "title": "生猪相关库存/仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 725, "note": "生猪无标准仓单库存概念；此处为公开源登记的交割库存近似序列，仅供参考", "section_match": ["生猪 LH"]},
-    "P": {"name": "棕榈油", "title": "棕榈油仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 1644, "section_match": ["棕榈油 P"]},
-    "Y": {"name": "豆油", "title": "豆油仓单季节性", "unit": "吨", "unit_scale": 1, "source_pref": ["99", "em"], "anchor": 27230, "section_match": ["豆油 Y"]}
+  "SC": {
+   "name": "原油",
+   "title": "原油仓单季节性",
+   "unit": "万桶",
+   "unit_scale": 10000,
+   "source_pref": [
+    "receipt",
+    "99"
+   ],
+   "anchor": 3666000,
+   "section_match": [
+    "原油 SC"
+   ]
+  },
+  "FU": {
+   "name": "燃料油",
+   "title": "燃料油仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99"
+   ],
+   "anchor": 7870,
+   "section_match": [
+    "燃料油 FU"
+   ]
+  },
+  "PG": {
+   "name": "LPG",
+   "title": "LPG仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": 5406,
+   "section_match": [
+    "LPG PG"
+   ],
+   "note": "大商所注册仓单，单位手"
+  },
+  "EB": {
+   "name": "苯乙烯",
+   "title": "苯乙烯仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "section_match": [
+    "苯乙烯 EB"
+   ],
+   "note": "大商所注册仓单，单位手"
+  },
+  "BU": {
+   "name": "沥青",
+   "title": "沥青仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99"
+   ],
+   "anchor": 41560,
+   "口径": "交易所注册仓单合计（含厂库）；11/9 仓库0 + 厂库41560",
+   "section_match": [
+    "沥青 BU"
+   ]
+  },
+  "MA": {
+   "name": "甲醇",
+   "title": "甲醇仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": 5011,
+   "section_match": [
+    "甲醇 / PTA",
+    "甲醇 / PTA / EG / PVC"
+   ],
+   "note": "郑商所注册仓单，单位张（每张=10吨）；当日点位来自郑商所仓单日报"
+  },
+  "TA": {
+   "name": "PTA",
+   "title": "PTA仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": 3197,
+   "section_match": [
+    "甲醇 / PTA"
+   ],
+   "note": "郑商所注册仓单，单位张（每张=5吨）；当日点位来自郑商所仓单日报"
+  },
+  "EG": {
+   "name": "乙二醇",
+   "title": "乙二醇仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": 3327,
+   "section_match": [
+    "甲醇 / PTA"
+   ],
+   "note": "大商所注册仓单，单位手"
+  },
+  "V": {
+   "name": "PVC",
+   "title": "PVC仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": 111000,
+   "section_match": [
+    "甲醇 / PTA"
+   ],
+   "note": "大商所注册仓单，单位手"
+  },
+  "CU": {
+   "name": "铜",
+   "title": "铜仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": 2844,
+   "section_match": [
+    "铜 CU2612",
+    "4.1 铜"
+   ]
+  },
+  "AL": {
+   "name": "铝",
+   "title": "铝仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": 49933,
+   "section_match": [
+    "铝 AL",
+    "4.2 铝"
+   ]
+  },
+  "JM": {
+   "name": "焦煤",
+   "title": "焦煤仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": 0,
+   "note": "大商所注册仓单，单位手；交易所仓单长期多为 0，季节图仅供参考；社库/港口库存另见正文",
+   "section_match": [
+    "焦煤 JM"
+   ]
+  },
+  "RB": {
+   "name": "螺纹钢",
+   "title": "螺纹钢仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99"
+   ],
+   "anchor": 55731,
+   "note": "以交易所/同花顺仓单为准；99期货网近月口径偏低已弃用冲突值",
+   "section_match": [
+    "螺纹 RB"
+   ]
+  },
+  "HC": {
+   "name": "热卷",
+   "title": "热轧卷板仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": 199104,
+   "section_match": [
+    "热卷 HC"
+   ]
+  },
+  "I": {
+   "name": "铁矿石",
+   "title": "铁矿石仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": 3450,
+   "note": "大商所注册仓单，单位手；交易所注册仓单（吨），非47港社会库存",
+   "section_match": [
+    "铁矿 I"
+   ]
+  },
+  "J": {
+   "name": "焦炭",
+   "title": "焦炭仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": 999,
+   "section_match": [
+    "焦炭 J"
+   ],
+   "note": "大商所注册仓单，单位手"
+  },
+  "LH": {
+   "name": "生猪",
+   "title": "生猪相关库存/仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": 725,
+   "note": "大商所注册仓单，单位手；生猪无标准仓单库存概念；此处为公开源登记的交割库存近似序列，仅供参考",
+   "section_match": [
+    "生猪 LH"
+   ]
+  },
+  "P": {
+   "name": "棕榈油",
+   "title": "棕榈油仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": 1644,
+   "section_match": [
+    "棕榈油 P"
+   ],
+   "note": "大商所注册仓单，单位手"
+  },
+  "Y": {
+   "name": "豆油",
+   "title": "豆油仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": 27230,
+   "section_match": [
+    "豆油 Y"
+   ],
+   "note": "大商所注册仓单，单位手"
+  },
+  "ZN": {
+   "name": "锌",
+   "title": "锌仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "PB": {
+   "name": "铅",
+   "title": "铅仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "NI": {
+   "name": "镍",
+   "title": "镍仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "SN": {
+   "name": "锡",
+   "title": "锡仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "AO": {
+   "name": "氧化铝",
+   "title": "氧化铝仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "AU": {
+   "name": "黄金",
+   "title": "黄金仓单季节性",
+   "unit": "千克",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "AG": {
+   "name": "白银",
+   "title": "白银仓单季节性",
+   "unit": "千克",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "SS": {
+   "name": "不锈钢",
+   "title": "不锈钢仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "LU": {
+   "name": "低硫燃料油",
+   "title": "低硫燃料油仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "RU": {
+   "name": "天然橡胶",
+   "title": "天然橡胶仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "NR": {
+   "name": "20号胶",
+   "title": "20号胶仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "SP": {
+   "name": "纸浆",
+   "title": "纸浆仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "BR": {
+   "name": "丁二烯橡胶",
+   "title": "丁二烯橡胶仓单季节性",
+   "unit": "吨",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null
+  },
+  "SF": {
+   "name": "硅铁",
+   "title": "硅铁仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=5吨）；当日点位来自郑商所仓单日报"
+  },
+  "SM": {
+   "name": "锰硅",
+   "title": "锰硅仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=5吨）；当日点位来自郑商所仓单日报"
+  },
+  "L": {
+   "name": "塑料（LLDPE）",
+   "title": "塑料（LLDPE）仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "99期货网大商所/广期所仓单序列，单位按来源（手/张）记，与吨换算见合约乘数"
+  },
+  "PP": {
+   "name": "聚丙烯",
+   "title": "聚丙烯仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "99期货网大商所/广期所仓单序列，单位按来源（手/张）记，与吨换算见合约乘数"
+  },
+  "SA": {
+   "name": "纯碱",
+   "title": "纯碱仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=20吨）；当日点位来自郑商所仓单日报"
+  },
+  "FG": {
+   "name": "玻璃",
+   "title": "玻璃仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=20吨）；当日点位来自郑商所仓单日报"
+  },
+  "UR": {
+   "name": "尿素",
+   "title": "尿素仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=20吨）；当日点位来自郑商所仓单日报"
+  },
+  "PF": {
+   "name": "短纤",
+   "title": "短纤仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=5吨）；当日点位来自郑商所仓单日报"
+  },
+  "PX": {
+   "name": "PX",
+   "title": "PX仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=5吨）；当日点位来自郑商所仓单日报"
+  },
+  "SH": {
+   "name": "烧碱",
+   "title": "烧碱仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=30吨）；当日点位来自郑商所仓单日报"
+  },
+  "SI": {
+   "name": "工业硅",
+   "title": "工业硅仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "em",
+    "99"
+   ],
+   "anchor": null,
+   "note": "广期所注册仓单，单位手；99期货网广期所接口返回空、广期所官网对本机返回500，暂仅有东方财富近3个月序列，多年季节对比待补"
+  },
+  "PS": {
+   "name": "多晶硅",
+   "title": "多晶硅仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "em",
+    "99"
+   ],
+   "anchor": null,
+   "note": "广期所注册仓单，单位手；99期货网广期所接口返回空、广期所官网对本机返回500，暂仅有东方财富近3个月序列，多年季节对比待补"
+  },
+  "M": {
+   "name": "豆粕",
+   "title": "豆粕仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "99期货网大商所/广期所仓单序列，单位按来源（手/张）记，与吨换算见合约乘数"
+  },
+  "C": {
+   "name": "玉米",
+   "title": "玉米仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "99期货网大商所/广期所仓单序列，单位按来源（手/张）记，与吨换算见合约乘数"
+  },
+  "CS": {
+   "name": "玉米淀粉",
+   "title": "玉米淀粉仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "99期货网大商所/广期所仓单序列，单位按来源（手/张）记，与吨换算见合约乘数"
+  },
+  "A": {
+   "name": "豆一",
+   "title": "豆一仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "99期货网大商所/广期所仓单序列，单位按来源（手/张）记，与吨换算见合约乘数"
+  },
+  "B": {
+   "name": "豆二",
+   "title": "豆二仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "99期货网大商所/广期所仓单序列，单位按来源（手/张）记，与吨换算见合约乘数"
+  },
+  "OI": {
+   "name": "菜油",
+   "title": "菜油仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=10吨）；当日点位来自郑商所仓单日报"
+  },
+  "RM": {
+   "name": "菜粕",
+   "title": "菜粕仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=10吨）；当日点位来自郑商所仓单日报"
+  },
+  "SR": {
+   "name": "白糖",
+   "title": "白糖仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=10吨）；当日点位来自郑商所仓单日报"
+  },
+  "CF": {
+   "name": "棉花",
+   "title": "棉花仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=40吨）；当日点位来自郑商所仓单日报"
+  },
+  "PK": {
+   "name": "花生",
+   "title": "花生仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=5吨）；当日点位来自郑商所仓单日报"
+  },
+  "JD": {
+   "name": "鸡蛋",
+   "title": "鸡蛋仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "99期货网大商所/广期所仓单序列，单位按来源（手/张）记，与吨换算见合约乘数"
+  },
+  "AP": {
+   "name": "苹果",
+   "title": "苹果仓单季节性",
+   "unit": "张",
+   "unit_scale": 1,
+   "source_pref": [
+    "receipt",
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "郑商所注册仓单，单位张（每张=20吨（多为预报））；当日点位来自郑商所仓单日报"
+  },
+  "LG": {
+   "name": "原木",
+   "title": "原木仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "99期货网大商所/广期所仓单序列，单位按来源（手/张）记，与吨换算见合约乘数"
+  },
+  "BZ": {
+   "name": "纯苯",
+   "title": "纯苯仓单季节性",
+   "unit": "手",
+   "unit_scale": 1,
+   "source_pref": [
+    "99",
+    "em"
+   ],
+   "anchor": null,
+   "note": "99期货网大商所/广期所仓单序列，单位按来源（手/张）记，与吨换算见合约乘数"
   }
+ }
 }

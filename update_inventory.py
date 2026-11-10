@@ -42,14 +42,27 @@ NAME_99 = {
     "MA": "甲醇", "TA": "PTA", "EG": "乙二醇", "V": "聚氯乙烯",
     "FU": "燃料油", "BU": "石油沥青", "SC": "原油",
     "PG": "液化石油气", "EB": "苯乙烯", "LH": "生猪",
+    # extended 2026-11-10: full active coverage
+    "ZN": "锌", "PB": "铅", "NI": "镍", "SN": "锡", "AO": "氧化铝",
+    "AU": "黄金", "AG": "白银", "SS": "不锈钢", "LU": "低硫燃料油",
+    "RU": "天然橡胶", "NR": "20号胶", "SP": "纸浆", "BR": "丁二烯橡胶",
+    "SF": "硅铁", "SM": "锰硅", "L": "聚乙烯", "PP": "聚丙烯",
+    "SA": "纯碱", "FG": "玻璃", "UR": "尿素", "PF": "短纤", "PX": "对二甲苯",
+    "SH": "烧碱", "SI": "工业硅", "PS": "多晶硅", "LC": "碳酸锂",
+    "M": "豆粕", "C": "玉米", "CS": "玉米淀粉", "A": "豆一", "B": "豆二",
+    "OI": "菜籽油", "RM": "菜籽粕", "SR": "白糖", "CF": "棉花", "PK": "花生",
+    "JD": "鸡蛋", "AP": "苹果", "LG": "原木", "BZ": "纯苯",
 }
 NAME_EM = {
     "LC": "碳酸锂", "CU": "沪铜", "AL": "沪铝", "RB": "螺纹钢", "HC": "热卷",
     "FU": "燃油", "BU": "沥青", "P": "棕榈", "Y": "豆油", "MA": "甲醇",
     "TA": "PTA", "EG": "乙二醇", "V": "PVC", "I": "铁矿石", "JM": "焦煤",
     "J": "焦炭", "PG": "液化石油气", "EB": "苯乙烯", "LH": "生猪",
+    "SI": "工业硅", "PS": "多晶硅",
 }
-SHFE_INE = ["CU", "AL", "RB", "HC", "FU", "BU", "SC"]
+SHFE_INE = ["CU", "AL", "RB", "HC", "FU", "BU", "SC", "ZN", "PB", "NI", "SN", "AO", "AU", "AG",
+            "SS", "LU", "RU", "NR", "SP", "BR"]
+CZCE_CODES = ["SR", "CF", "RM", "OI", "AP", "PK", "TA", "MA", "FG", "SF", "SM", "UR", "SA", "PF", "PX", "SH"]
 
 
 def load_meta() -> dict:
@@ -88,7 +101,7 @@ def fetch_em(code: str) -> pd.DataFrame | None:
 def fetch_receipt_recent(codes: list[str], months_back: int = 4) -> pd.DataFrame:
     """Daily SHFE/INE receipts for recent months (akshare loops day-by-day)."""
     import akshare as ak
-    today = date(2026, 11, 9)
+    today = date.today()
     start = (today.replace(day=1) - timedelta(days=30 * (months_back - 1))).replace(day=1)
     rows = []
     cur = start
@@ -117,6 +130,47 @@ def fetch_receipt_recent(codes: list[str], months_back: int = 4) -> pd.DataFrame
     out = out.rename(columns={"receipt": "value", "var": "var"})
     out["source"] = "receipt"
     return out[["var", "date", "value", "source"]]
+
+
+def fetch_czce_receipt(d: date) -> pd.DataFrame:
+    """Parse CZCE official daily warehouse-receipt sheet (units: 张) for one day."""
+    import re as _re
+    import requests
+    url = f"https://www.czce.com.cn/cn/DFSStaticFiles/Future/{d.year}/{d:%Y%m%d}/FutureDataWhsheet.txt"
+    r = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+    if r.status_code != 200 or "仓单" not in r.text:
+        return pd.DataFrame(columns=["var", "date", "value", "chg", "source"])
+    rows = []
+    cur, header = None, None
+    for line in r.text.splitlines():
+        m = _re.match(r"品种：\S*?([A-Z]{2})\s", line)
+        if line.startswith("品种：") and "仓单=" in line:
+            m2 = _re.search(r"([A-Z]{2})", line.split("单位")[0])
+            cur = m2.group(1) if m2 else None
+            if "PTA" in line.split("单位")[0]:
+                cur = "TA"
+            header = None
+            continue
+        if line.startswith("品种："):
+            cur = None  # 预报 blocks
+            continue
+        if cur and line.startswith("仓库编号"):
+            header = [h.strip() for h in line.split("|")]
+            continue
+        if cur and header and line.startswith("总计"):
+            cells = [c.strip() for c in line.split("|")]
+            # align from right is unreliable; use header names
+            vals = dict(zip(header, cells))
+            qty = 0.0
+            for k, v in vals.items():
+                if k.startswith("仓单数量") and v.replace(",", "").lstrip("-").isdigit():
+                    qty += float(v.replace(",", ""))
+            chg = vals.get("当日增减", "")
+            chg = float(chg.replace(",", "")) if chg.replace(",", "").lstrip("-").isdigit() else float("nan")
+            if cur in CZCE_CODES:
+                rows.append({"var": cur, "date": pd.Timestamp(d), "value": qty, "chg": chg, "source": "receipt"})
+            cur = None
+    return pd.DataFrame(rows)
 
 
 def merge_series(code: str, meta: dict, receipt_all: pd.DataFrame | None) -> pd.DataFrame:
@@ -337,7 +391,7 @@ def svg_chart(
     )
     # unit
     parts.append(
-        f'<text x="{pad_l}" y="{pad_t-6}" font-size="10" fill="var(--chart-muted,#6e675c)" '
+        f'<text x="{width-pad_r}" y="22" text-anchor="end" font-size="11" fill="var(--chart-muted,#6e675c)" '
         f'font-family="Noto Sans CJK SC, Noto Sans SC, sans-serif">单位：{unit}</text>'
     )
 
@@ -362,7 +416,7 @@ def svg_chart(
 def render_all(meta: dict) -> dict:
     CHARTS.mkdir(parents=True, exist_ok=True)
     receipt_frames = []
-    for path in [DATA / "shfe_ine_receipt.csv", DATA / "shfe_ine_receipt_recent.csv"]:
+    for path in [DATA / "shfe_ine_receipt.csv", DATA / "shfe_ine_receipt_recent.csv", DATA / "czce_receipt.csv"]:
         if path.exists():
             df = pd.read_csv(path)
             df["date"] = pd.to_datetime(df["date"].astype(str))
@@ -491,14 +545,44 @@ def refresh_fetch(meta: dict) -> None:
             print(f"  em FAIL {code}: {e}")
         time.sleep(0.1)
 
+    print("== fetch CZCE official receipt (recent days) ==")
+    try:
+        path = DATA / "czce_receipt.csv"
+        old = pd.read_csv(path) if path.exists() else pd.DataFrame()
+        frames = [old] if len(old) else []
+        d = date.today()
+        for k in range(0, 15):
+            dd = d - timedelta(days=k)
+            if dd.weekday() >= 5:
+                continue
+            df = fetch_czce_receipt(dd)
+            if len(df):
+                df = df.rename(columns={"value": "receipt", "chg": "receipt_chg"})
+                df["date"] = df["date"].dt.strftime("%Y%m%d")
+                frames.append(df[["var", "receipt", "receipt_chg", "date"]])
+                print(f"  czce {dd}: {len(df)}")
+            time.sleep(0.3)
+        if frames:
+            allc = pd.concat(frames, ignore_index=True)
+            allc["date"] = allc["date"].astype(str)
+            allc = allc.drop_duplicates(["var", "date"], keep="last").sort_values(["var", "date"])
+            allc.to_csv(path, index=False)
+    except Exception as e:
+        print(f"  czce FAIL: {e}")
+
     print("== fetch SHFE/INE receipt recent ==")
     try:
-        rec = fetch_receipt_recent(SHFE_INE, months_back=3)
+        rec = fetch_receipt_recent(SHFE_INE, months_back=2)
         if len(rec):
             # normalize columns for csv
             save = rec.rename(columns={"value": "receipt"})
             save["date"] = save["date"].dt.strftime("%Y%m%d")
-            save.to_csv(DATA / "shfe_ine_receipt_recent.csv", index=False)
+            rp = DATA / "shfe_ine_receipt_recent.csv"
+            if rp.exists():
+                prev = pd.read_csv(rp)
+                prev["date"] = prev["date"].astype(str)
+                save = pd.concat([prev, save], ignore_index=True).drop_duplicates(["var", "date"], keep="last")
+            save.to_csv(rp, index=False)
             print(f"  receipt rows={len(rec)}")
     except Exception as e:
         print(f"  receipt FAIL: {e}")
