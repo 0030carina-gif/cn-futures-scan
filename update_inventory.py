@@ -424,6 +424,13 @@ def render_all(meta: dict) -> dict:
                 df = df.rename(columns={"receipt": "value"})
             df["source"] = "receipt"
             receipt_frames.append(df[["var", "date", "value", "source"]])
+    # DCE/GFEX: official sites unreachable from box; daily values from 同花顺 iFinD 仓单快讯 (exchange numbers)
+    flash = DATA / "dce_gfex_flash.csv"
+    if flash.exists():
+        df = pd.read_csv(flash)
+        df["date"] = pd.to_datetime(df["date"].astype(str))
+        df["source"] = "ths"
+        receipt_frames.append(df[["var", "date", "value", "source"]])
     receipt_all = pd.concat(receipt_frames, ignore_index=True).drop_duplicates(["var", "date"]) if receipt_frames else None
 
     manifest = {}
@@ -445,7 +452,7 @@ def render_all(meta: dict) -> dict:
 
         # source note
         sources = sorted(series_df["source"].unique())
-        src_map = {"99qh": "99期货网", "em": "东方财富", "receipt": "交易所仓单日报", "anchor": "备忘核对点"}
+        src_map = {"99qh": "99期货网", "em": "东方财富", "receipt": "交易所仓单日报", "anchor": "备忘核对点", "ths": "同花顺iFinD仓单快讯"}
         src_txt = "、".join(src_map.get(s, s) for s in sources)
         years = sorted(by.keys())
         last = series_df.dropna(subset=["value"]).iloc[-1]
