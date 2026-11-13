@@ -2,9 +2,9 @@
   "LC": {
     "ok": true,
     "years": "2026-2026",
-    "n": 68,
+    "n": 69,
     "unit": "手",
-    "last": 21745.0,
+    "last": 20285.0,
     "sources": [
       "em",
       "ths"
@@ -14,7 +14,7 @@
   "SC": {
     "ok": true,
     "years": "2018-2026",
-    "n": 1795,
+    "n": 1796,
     "unit": "万桶",
     "last": 366.6,
     "sources": [
@@ -28,7 +28,7 @@
   "FU": {
     "ok": true,
     "years": "2018-2026",
-    "n": 2685,
+    "n": 2686,
     "unit": "吨",
     "last": 0.0,
     "sources": [
@@ -42,12 +42,13 @@
   "PG": {
     "ok": true,
     "years": "2020-2026",
-    "n": 1474,
+    "n": 1475,
     "unit": "手",
-    "last": 5826.0,
+    "last": 6826.0,
     "sources": [
       "99qh",
-      "anchor"
+      "anchor",
+      "ths"
     ],
     "svg": "scans/charts/PG_season.svg"
   },
@@ -65,7 +66,7 @@
   "BU": {
     "ok": true,
     "years": "2018-2026",
-    "n": 2301,
+    "n": 2302,
     "unit": "吨",
     "last": 66560.0,
     "sources": [
@@ -78,9 +79,9 @@
   "MA": {
     "ok": true,
     "years": "2018-2026",
-    "n": 3596,
+    "n": 3597,
     "unit": "张",
-    "last": 4711.0,
+    "last": 4311.0,
     "sources": [
       "99qh",
       "anchor",
@@ -91,7 +92,7 @@
   "TA": {
     "ok": true,
     "years": "2018-2026",
-    "n": 4606,
+    "n": 4607,
     "unit": "张",
     "last": 22379.0,
     "sources": [
@@ -105,33 +106,35 @@
   "EG": {
     "ok": true,
     "years": "2018-2026",
-    "n": 1908,
+    "n": 1909,
     "unit": "手",
-    "last": 3332.0,
+    "last": 3282.0,
     "sources": [
       "99qh",
-      "anchor"
+      "anchor",
+      "ths"
     ],
     "svg": "scans/charts/EG_season.svg"
   },
   "V": {
     "ok": true,
     "years": "2018-2026",
-    "n": 4173,
+    "n": 4174,
     "unit": "手",
-    "last": 109717.0,
+    "last": 109233.0,
     "sources": [
       "99qh",
-      "anchor"
+      "anchor",
+      "ths"
     ],
     "svg": "scans/charts/V_season.svg"
   },
   "CU": {
     "ok": true,
     "years": "2018-2026",
-    "n": 2654,
+    "n": 2655,
     "unit": "吨",
-    "last": 2444.0,
+    "last": 2270.0,
     "sources": [
       "99qh",
       "anchor",
@@ -143,9 +146,9 @@
   "AL": {
     "ok": true,
     "years": "2018-2026",
-    "n": 2651,
+    "n": 2652,
     "unit": "吨",
-    "last": 46509.0,
+    "last": 45336.0,
     "sources": [
       "99qh",
       "anchor",
@@ -157,19 +160,20 @@
   "JM": {
     "ok": true,
     "years": "2018-2026",
-    "n": 2508,
+    "n": 2509,
     "unit": "手",
-    "last": 900.0,
+    "last": 3148.0,
     "sources": [
       "99qh",
-      "anchor"
+      "anchor",
+      "ths"
     ],
     "svg": "scans/charts/JM_season.svg"
   },
   "RB": {
     "ok": true,
     "years": "2018-2026",
-    "n": 2548,
+    "n": 2549,
     "unit": "吨",
     "last": 53018.0,
     "sources": [
@@ -183,7 +187,7 @@
   "HC": {
     "ok": true,
     "years": "2018-2026",
-    "n": 2181,
+    "n": 2182,
     "unit": "吨",
     "last": 213763.0,
     "sources": [
@@ -197,69 +201,74 @@
   "I": {
     "ok": true,
     "years": "2018-2026",
-    "n": 3014,
+    "n": 3015,
     "unit": "手",
     "last": 3300.0,
     "sources": [
       "99qh",
-      "anchor"
+      "anchor",
+      "ths"
     ],
     "svg": "scans/charts/I_season.svg"
   },
   "J": {
     "ok": true,
     "years": "2018-2026",
-    "n": 3618,
+    "n": 3619,
     "unit": "手",
     "last": 999.0,
     "sources": [
       "99qh",
-      "anchor"
+      "anchor",
+      "ths"
     ],
     "svg": "scans/charts/J_season.svg"
   },
   "LH": {
     "ok": true,
     "years": "2021-2026",
-    "n": 979,
+    "n": 980,
     "unit": "手",
     "last": 725.0,
     "sources": [
       "99qh",
-      "anchor"
+      "anchor",
+      "ths"
     ],
     "svg": "scans/charts/LH_season.svg"
   },
   "P": {
     "ok": true,
     "years": "2018-2026",
-    "n": 4139,
+    "n": 4140,
     "unit": "手",
     "last": 2223.0,
     "sources": [
       "99qh",
-      "anchor"
+      "anchor",
+      "ths"
     ],
     "svg": "scans/charts/P_season.svg"
   },
   "Y": {
     "ok": true,
     "years": "2018-2026",
-    "n": 4388,
+    "n": 4389,
     "unit": "手",
-    "last": 27292.0,
+    "last": 27592.0,
     "sources": [
       "99qh",
-      "anchor"
+      "anchor",
+      "ths"
     ],
     "svg": "scans/charts/Y_season.svg"
   },
   "ZN": {
     "ok": true,
     "years": "2018-2026",
-    "n": 1093,
+    "n": 1094,
     "unit": "吨",
-    "last": 54130.0,
+    "last": 53806.0,
     "sources": [
       "99qh",
       "receipt"
@@ -269,9 +278,9 @@
   "PB": {
     "ok": true,
     "years": "2018-2026",
-    "n": 892,
+    "n": 893,
     "unit": "吨",
-    "last": 8245.0,
+    "last": 8094.0,
     "sources": [
       "99qh",
       "receipt"
@@ -281,9 +290,9 @@
   "NI": {
     "ok": true,
     "years": "2018-2026",
-    "n": 680,
+    "n": 681,
     "unit": "吨",
-    "last": 88422.0,
+    "last": 88596.0,
     "sources": [
       "99qh",
       "receipt"
@@ -293,9 +302,9 @@
   "SN": {
     "ok": true,
     "years": "2018-2026",
-    "n": 680,
+    "n": 681,
     "unit": "吨",
-    "last": 1646.0,
+    "last": 1822.0,
     "sources": [
       "99qh",
       "receipt"
@@ -305,9 +314,9 @@
   "AO": {
     "ok": true,
     "years": "2023-2026",
-    "n": 250,
+    "n": 251,
     "unit": "吨",
-    "last": 218952.0,
+    "last": 234282.0,
     "sources": [
       "99qh",
       "receipt"
@@ -317,7 +326,7 @@
   "AU": {
     "ok": true,
     "years": "2018-2026",
-    "n": 1179,
+    "n": 1180,
     "unit": "千克",
     "last": 118404.0,
     "sources": [
@@ -329,9 +338,9 @@
   "AG": {
     "ok": true,
     "years": "2018-2026",
-    "n": 815,
+    "n": 816,
     "unit": "千克",
-    "last": 1324163.0,
+    "last": 1336580.0,
     "sources": [
       "99qh",
       "receipt"
@@ -341,7 +350,7 @@
   "SS": {
     "ok": true,
     "years": "2020-2026",
-    "n": 424,
+    "n": 425,
     "unit": "吨",
     "last": 54958.0,
     "sources": [
@@ -353,7 +362,7 @@
   "LU": {
     "ok": true,
     "years": "2020-2026",
-    "n": 394,
+    "n": 395,
     "unit": "吨",
     "last": 0.0,
     "sources": [
@@ -365,9 +374,9 @@
   "RU": {
     "ok": true,
     "years": "2018-2026",
-    "n": 1202,
+    "n": 1203,
     "unit": "吨",
-    "last": 144040.0,
+    "last": 142830.0,
     "sources": [
       "99qh",
       "receipt"
@@ -377,7 +386,7 @@
   "NR": {
     "ok": true,
     "years": "2019-2026",
-    "n": 442,
+    "n": 443,
     "unit": "吨",
     "last": 7459.0,
     "sources": [
@@ -389,9 +398,9 @@
   "SP": {
     "ok": true,
     "years": "2018-2026",
-    "n": 492,
+    "n": 493,
     "unit": "吨",
-    "last": 441521.0,
+    "last": 443350.0,
     "sources": [
       "99qh",
       "receipt"
@@ -401,7 +410,7 @@
   "BR": {
     "ok": true,
     "years": "2023-2026",
-    "n": 241,
+    "n": 242,
     "unit": "吨",
     "last": 10450.0,
     "sources": [
@@ -413,9 +422,9 @@
   "SF": {
     "ok": true,
     "years": "2018-2026",
-    "n": 2875,
+    "n": 2876,
     "unit": "张",
-    "last": 5418.0,
+    "last": 5318.0,
     "sources": [
       "99qh",
       "receipt"
@@ -425,7 +434,7 @@
   "SM": {
     "ok": true,
     "years": "2018-2026",
-    "n": 2912,
+    "n": 2913,
     "unit": "张",
     "last": 16843.0,
     "sources": [
@@ -437,31 +446,33 @@
   "L": {
     "ok": true,
     "years": "2018-2026",
-    "n": 4291,
+    "n": 4292,
     "unit": "手",
-    "last": 4208.0,
+    "last": 4495.0,
     "sources": [
-      "99qh"
+      "99qh",
+      "ths"
     ],
     "svg": "scans/charts/L_season.svg"
   },
   "PP": {
     "ok": true,
     "years": "2018-2026",
-    "n": 3032,
+    "n": 3033,
     "unit": "手",
-    "last": 25892.0,
+    "last": 25527.0,
     "sources": [
-      "99qh"
+      "99qh",
+      "ths"
     ],
     "svg": "scans/charts/PP_season.svg"
   },
   "SA": {
     "ok": true,
     "years": "2020-2026",
-    "n": 1603,
+    "n": 1604,
     "unit": "张",
-    "last": 2831.0,
+    "last": 2531.0,
     "sources": [
       "99qh",
       "receipt"
@@ -471,9 +482,9 @@
   "FG": {
     "ok": true,
     "years": "2018-2026",
-    "n": 3328,
+    "n": 3329,
     "unit": "张",
-    "last": 1641.0,
+    "last": 1621.0,
     "sources": [
       "99qh",
       "receipt"
@@ -483,7 +494,7 @@
   "UR": {
     "ok": true,
     "years": "2019-2026",
-    "n": 1698,
+    "n": 1699,
     "unit": "张",
     "last": 3348.0,
     "sources": [
@@ -495,7 +506,7 @@
   "PF": {
     "ok": true,
     "years": "2020-2026",
-    "n": 1459,
+    "n": 1460,
     "unit": "张",
     "last": 1562.0,
     "sources": [
@@ -507,7 +518,7 @@
   "PX": {
     "ok": true,
     "years": "2024-2026",
-    "n": 652,
+    "n": 653,
     "unit": "张",
     "last": 0.0,
     "sources": [
@@ -519,7 +530,7 @@
   "SH": {
     "ok": true,
     "years": "2024-2026",
-    "n": 654,
+    "n": 655,
     "unit": "张",
     "last": 111.0,
     "sources": [
@@ -533,7 +544,7 @@
     "years": "2026-2026",
     "n": 67,
     "unit": "手",
-    "last": 26343.0,
+    "last": 25979.0,
     "sources": [
       "em"
     ],
@@ -544,7 +555,7 @@
     "years": "2026-2026",
     "n": 67,
     "unit": "手",
-    "last": 18140.0,
+    "last": 17310.0,
     "sources": [
       "em"
     ],
@@ -553,64 +564,69 @@
   "M": {
     "ok": true,
     "years": "2018-2026",
-    "n": 4451,
+    "n": 4452,
     "unit": "手",
-    "last": 51845.0,
+    "last": 51615.0,
     "sources": [
-      "99qh"
+      "99qh",
+      "ths"
     ],
     "svg": "scans/charts/M_season.svg"
   },
   "C": {
     "ok": true,
     "years": "2018-2026",
-    "n": 4448,
+    "n": 4449,
     "unit": "手",
-    "last": 151058.0,
+    "last": 149544.0,
     "sources": [
-      "99qh"
+      "99qh",
+      "ths"
     ],
     "svg": "scans/charts/C_season.svg"
   },
   "CS": {
     "ok": true,
     "years": "2018-2026",
-    "n": 2706,
+    "n": 2707,
     "unit": "手",
     "last": 13432.0,
     "sources": [
-      "99qh"
+      "99qh",
+      "ths"
     ],
     "svg": "scans/charts/CS_season.svg"
   },
   "A": {
     "ok": true,
     "years": "2018-2026",
-    "n": 4413,
+    "n": 4414,
     "unit": "手",
-    "last": 85844.0,
+    "last": 86787.0,
     "sources": [
-      "99qh"
+      "99qh",
+      "ths"
     ],
     "svg": "scans/charts/A_season.svg"
   },
   "B": {
     "ok": true,
     "years": "2018-2026",
-    "n": 3010,
+    "n": 3011,
     "unit": "手",
     "last": 800.0,
     "sources": [
-      "99qh"
+      "99qh",
+      "ths"
     ],
     "svg": "scans/charts/B_season.svg"
   },
   "OI": {
     "ok": true,
     "years": "2018-2026",
-    "n": 4580,
+    "n": 4581,
     "unit": "张",
-    "last": 30.0,
+    "last": 236.0,
     "sources": [
       "99qh",
       "receipt"
@@ -620,9 +636,9 @@
   "RM": {
     "ok": true,
     "years": "2018-2026",
-    "n": 3283,
+    "n": 3284,
     "unit": "张",
-    "last": 2232.0,
+    "last": 2170.0,
     "sources": [
       "99qh",
       "receipt"
@@ -632,9 +648,9 @@
   "SR": {
     "ok": true,
     "years": "2018-2026",
-    "n": 4650,
+    "n": 4651,
     "unit": "张",
-    "last": 19824.0,
+    "last": 19761.0,
     "sources": [
       "99qh",
       "receipt"
@@ -644,9 +660,9 @@
   "CF": {
     "ok": true,
     "years": "2018-2026",
-    "n": 4685,
+    "n": 4686,
     "unit": "张",
-    "last": 6311.0,
+    "last": 6304.0,
     "sources": [
       "99qh",
       "receipt"
@@ -656,7 +672,7 @@
   "PK": {
     "ok": true,
     "years": "2021-2026",
-    "n": 1256,
+    "n": 1257,
     "unit": "张",
     "last": 900.0,
     "sources": [

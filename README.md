@@ -14,10 +14,11 @@
 
 ## 本期
 
-- [2026-11-12 深度扫描](https://0030carina-gif.github.io/cn-futures-scan/scans/2026-11-12.html)（日盘收盘；全品种仓单季节图）
+- [2026-11-13 深度扫描](https://0030carina-gif.github.io/cn-futures-scan/)（日盘收盘；全品种仓单季节图）
 
 ## 历史期次
 
+- [2026-11-12](https://0030carina-gif.github.io/cn-futures-scan/scans/2026-11-12.html)
 - [2026-11-11](https://0030carina-gif.github.io/cn-futures-scan/scans/2026-11-11.html)
 - [2026-11-10](https://0030carina-gif.github.io/cn-futures-scan/scans/2026-11-10.html)
 - [2026-11-09](https://0030carina-gif.github.io/cn-futures-scan/scans/2026-11-09.html)（日盘收盘 + 夜盘开盘补记）
