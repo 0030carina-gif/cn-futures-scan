@@ -753,6 +753,16 @@ CHART_PLACEMENTS = [
 ]
 
 
+# Mysteel social/port inventory charts, shown after the warehouse-receipt chart.
+# Filenames: {CODE}_{kind}_season.html, e.g. RB_social_season.html, I_port_season.html.
+SOCIAL_CHARTS = {
+    "RB": ["RB_social"],
+    "I": ["I_port"],
+    "JM": ["JM_port"],
+    "J": ["J_port"],
+}
+
+
 def load_chart_fragment(code: str) -> str:
     path = CHART_DIR / f"{code}_season.html"
     if not path.exists():
@@ -763,8 +773,23 @@ def load_chart_fragment(code: str) -> str:
     return path.read_text(encoding="utf-8")
 
 
+def expand_chart_codes(codes: list[str]) -> list[str]:
+    """Append Mysteel social/port charts after each matching receipt chart code."""
+    out: list[str] = []
+    seen: set[str] = set()
+    for c in codes:
+        if c not in seen:
+            out.append(c)
+            seen.add(c)
+        for extra in SOCIAL_CHARTS.get(c, []):
+            if extra not in seen:
+                out.append(extra)
+                seen.add(extra)
+    return out
+
+
 def _chart_block(codes: list[str]) -> str:
-    frags = [load_chart_fragment(c) for c in codes]
+    frags = [load_chart_fragment(c) for c in expand_chart_codes(codes)]
     frags = [f for f in frags if f]
     if not frags:
         return ""

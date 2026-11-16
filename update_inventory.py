@@ -257,21 +257,28 @@ def to_doy_series(df: pd.DataFrame, unit_scale: float = 1.0) -> dict[int, list[t
 
 
 def nice_ticks(vmax: float, n: int = 5) -> list[float]:
+    """Return y-axis ticks from 0, with the last tick always >= vmax * 1.08."""
     if vmax <= 0:
         return [0, 1]
     raw = vmax * 1.08
-    exp = 10 ** math.floor(math.log10(raw))
-    step = raw / n
+    exp = 10 ** math.floor(math.log10(raw / max(n, 1)))
+    step = None
     for m in [1, 2, 2.5, 5, 10]:
         s = m * exp
-        if s >= step * 0.8:
+        if s * n >= raw * 0.8:
             step = s
             break
-    ticks = []
-    v = 0.0
-    while v <= raw + step * 0.01:
+    if step is None:
+        step = 10 * exp
+    ticks = [0.0]
+    v = step
+    # Always end at or above `raw` so series near the max are not clipped.
+    while v < raw - step * 1e-9:
         ticks.append(v)
         v += step
+        if len(ticks) > 16:
+            break
+    ticks.append(v)
     return ticks
 
 
@@ -299,6 +306,8 @@ def svg_chart(
         vmax = 1.0
     ticks = nice_ticks(vmax)
     ymax = ticks[-1] if ticks else vmax
+    if ymax < vmax:
+        ymax = vmax * 1.08
 
     def y_of(val: float) -> float:
         return pad_t + plot_h - (val / ymax) * plot_h
@@ -413,6 +422,20 @@ def svg_chart(
     return "\n".join(parts)
 
 
+
+def maybe_render_mysteel_charts() -> None:
+    """Render Mysteel social/port seasonal charts if vendor exports are present.
+
+    Raw 钢联 workbooks and full historical CSVs stay outside the public repo
+    (/workspace/vendor-data/mysteel/). See ingest_mysteel.py.
+    """
+    try:
+        from ingest_mysteel import render_if_available
+        render_if_available()
+    except Exception as e:
+        print(f"  mysteel social/port charts skipped: {e}")
+
+
 def render_all(meta: dict) -> dict:
     CHARTS.mkdir(parents=True, exist_ok=True)
     receipt_frames = []
@@ -495,6 +518,7 @@ def render_all(meta: dict) -> dict:
         }
         print(f"OK {code}: {years[0]}-{years[-1]} n={len(series_df)} last={last_val:.0f} {info['unit']}")
     (DATA / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    maybe_render_mysteel_charts()
     return manifest
 
 

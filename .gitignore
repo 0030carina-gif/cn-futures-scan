@@ -3,3 +3,7 @@ __pycache__/
 *.pyc
 preview-*.png
 .env
+data/mysteel/
+data/vendor/
+vendor-data/
+*.xlsx
