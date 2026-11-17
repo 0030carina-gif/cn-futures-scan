@@ -16,10 +16,11 @@
 
 ## 本期
 
-- [2026-11-16 深度扫描](https://0030carina-gif.github.io/cn-futures-scan/)（日盘收盘；全品种仓单季节图，螺纹/铁矿/焦煤/焦炭另附钢联社库或港口库存图）
+- [2026-11-17 深度扫描](https://0030carina-gif.github.io/cn-futures-scan/)（日盘收盘；全品种仓单季节图，螺纹/铁矿/焦煤/焦炭另附钢联社库或港口库存图）
 
 ## 历史期次
 
+- [2026-11-16](https://0030carina-gif.github.io/cn-futures-scan/scans/2026-11-16.html)
 - [2026-11-13](https://0030carina-gif.github.io/cn-futures-scan/scans/2026-11-13.html)
 - [2026-11-12](https://0030carina-gif.github.io/cn-futures-scan/scans/2026-11-12.html)
 - [2026-11-11](https://0030carina-gif.github.io/cn-futures-scan/scans/2026-11-11.html)
